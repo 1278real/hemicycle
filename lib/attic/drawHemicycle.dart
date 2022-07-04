@@ -17,10 +17,7 @@ import 'helpers.dart';
 import 'individual_votes.dart';
 
 class DrawHemicycle extends StatefulWidget {
-  /// `assemblyElements` is the number of elements to draw. It is mandatory.
   int assemblyElements;
-
-  /// `assemblyAngle` is the value of the arc of the Assembly expressed in degrees. By default, if not provided, it is 170°.
   double? assemblyAngle;
   double? assemblyWidth;
   List<IndividualVotes>? individualVotes;
@@ -32,6 +29,15 @@ class DrawHemicycle extends StatefulWidget {
   String? title;
   int? nbRows;
 
+  /// Creates a widget with Assembly view defined by these parameters :
+  /// [assemblyElements] is the number of elements to draw. It is required.
+  /// [assemblyAngle] is the value of the arc of the Assembly expressed in degrees. By default, if not provided, it is 170°.
+  /// [assemblyWidth] is the ratio of the Assembly inside the container. Will be discontinued, should not be used. Don't provide or set to 1.
+  /// [individualVotes] is a nullable List<IndividualVotes> : if not provided, then [groupSectors] should not be null. It will display individual color for each dot.
+  /// [groupSectors] is a nullable List<GroupSectors> : if not provided, then [individualVotes] should not be null. It will display color per sector for contiguous dot.
+  /// [withLegend] is a boolean that display or not the Legend. To force a minimal number of rows, provide [minLegendRows].
+  /// [withTitle] is a boolean that display or not the Title. It needs [title] String to be provided to display.
+  /// [nbRows] is the number of rows in the Assembly representation. By default, if not provided, it is 12.
   DrawHemicycle(this.assemblyElements,
       {this.assemblyAngle,
       this.assemblyWidth,
