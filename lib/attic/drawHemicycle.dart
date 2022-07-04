@@ -365,7 +365,9 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   math.sin(
                                       assemblyAngle / 360 * 2 * math.pi))) /
                           2)) *
-                  (((legendRows * 0.1 / assemblyWidth) +
+                  (((legendRows *
+                              (groupSectors != null ? 0.1 : 0.15) /
+                              assemblyWidth) +
                           (withTitle ? (0.15 / assemblyWidth) : 0)) +
                       1.15),
               color: backgroundColor ?? null,
