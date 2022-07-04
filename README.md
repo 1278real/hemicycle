@@ -51,9 +51,7 @@ class _HemicycleState extends State<Hemicycle> {
     void updateAndRefresh() async {
         Future.delayed(Duration(milliseconds: 100), (() {
             setState(() {
-                if (boolean) {
                 datasUpdated = true;
-                }
             });
         }));
     }
