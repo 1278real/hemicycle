@@ -18,7 +18,9 @@ The number of dots is up to you, by default 577 as for the French National Assem
 
 You can change the number of seats, the arc of the circle (by default, 170°) and, with the specific type of inputs, you can display individual voters or sectors for group appearance...
 
-![Image](https://github.com/1278real/hemicycle/blob/d23811596e9ee36c5a728390da145ac60a14273c/assets/groupes.png)
+| ![Image](https://github.com/1278real/hemicycle/blob/d23811596e9ee36c5a728390da145ac60a14273c/assets/groupes.png) | ![Image](https://github.com/1278real/hemicycle/blob/177de3d0ba7e0a8d5e76e0ec73f112b5ab44ee9c/assets/legislatives.png) |
+| :------------: | :------------: |
+| **DrawHemicycle** groupes parlementaires France 2022 | **DrawHemicycle** législatives France 2022 |
 
 ## Getting started
 
