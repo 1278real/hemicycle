@@ -10,16 +10,16 @@ import 'individual_votes.dart';
 
 class DrawHemicycle extends StatefulWidget {
   int assemblyElements;
-  double? assemblyAngle;
-  double? assemblyWidth;
-  List<IndividualVotes>? individualVotes;
-  List<GroupSectors>? groupSectors;
-  MaterialColor? backgroundColor;
-  bool? withLegend;
-  int? minLegendRows;
-  bool? withTitle;
-  String? title;
-  int? nbRows;
+  final double? assemblyAngle;
+  final double? assemblyWidth;
+  final List<IndividualVotes>? individualVotes;
+  final List<GroupSectors>? groupSectors;
+  final MaterialColor? backgroundColor;
+  final bool? withLegend;
+  final int? minLegendRows;
+  final bool? withTitle;
+  final String? title;
+  final int? nbRows;
 
   /// # Creates a widget with Assembly view defined by these parameters :
   ///
@@ -70,14 +70,14 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   int assemblyElements;
   double assemblyAngle;
   double assemblyWidth;
-  List<IndividualVotes>? individualVotes;
-  List<GroupSectors>? groupSectors;
-  MaterialColor? backgroundColor;
+  late List<IndividualVotes>? individualVotes;
+  late List<GroupSectors>? groupSectors;
+  late MaterialColor? backgroundColor;
   bool withLegend;
-  int? minLegendRows;
+  late int? minLegendRows;
   bool withTitle;
-  String? title;
-  int? nbRows;
+  late String? title;
+  late int? nbRows;
 
   _DrawHemicycleState(
       {required this.assemblyElements,
@@ -565,9 +565,7 @@ class AssemblyPainter extends CustomPainter {
         rowFilled[localRow] += 1;
         theElementsAttributes.add(ElementAttributes(
             i, localRow, localPosition, paletteColors[i],
-            parentColor: (paletteParentColors[i] != null
-                ? paletteParentColors[i]
-                : null)));
+            parentColor: paletteParentColors[i]));
         if (paletteColors[i] == customRouge) {
           // print(localRow.toString() + "/" + localPosition.toString());
           // print(rowFilled.toString());
