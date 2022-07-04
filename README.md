@@ -25,11 +25,68 @@ start using the package.
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Create a ```List<GroupSectors>``` containing every sectors you want to draw.
+Then use ```DrawHemicycle``` to get the semi-circle assembly representation. 
 
 ```dart
-const like = 'sample';
+class _HemicycleState extends State<Hemicycle> {
+  int numberTest = 0;
+  int resteTest = 0;
+
+  List<GroupSectors> hemicycleTest = [
+      GroupSectors(numberTest, customVert, description: "BEFORE"),
+      GroupSectors(1, customRouge, description: "NEW"),
+      GroupSectors(resteTest, customMiddleGrey1278, description: "AFTER")
+    ];
+
+  @override
+  void initState() {
+    numberTest = 1;
+    resteTest = 577 - numberTest - 1;
+
+    updateAndRefresh();
+    super.initState();
+  }
+  
+  void updateAndRefresh() async {
+    Future.delayed(Duration(milliseconds: 100), (() {
+      setState(() {
+            if (boolean) {
+              datasUpdated = true;
+            }
+          });
+    }));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: <Widget>[
+          if (datasUpdated)
+                  DrawHemicycle(
+                    resteTest + numberTest + 1,
+                    nbRows: ((resteTest + numberTest + 1) / 50).ceil(),
+                    groupSectors: hemicycleTest,
+                    withLegend: true,
+                    withTitle: true,
+                    title: "TEST",
+                  ),
+                TextButton(
+                    onPressed: () {
+                      setState(() {
+                        numberTest += 1;
+                        datasUpdated = false;
+                      });
+                      updateAndRefresh();
+                    },
+                    child:
+                        Text(("PLUS UN... (" + numberTest.toString() + ")"))),
+        ],
+      ),
+    );
+  }
+}
 ```
 
 ## Additional information

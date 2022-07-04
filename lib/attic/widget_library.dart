@@ -19,12 +19,12 @@ Widget myPlaceholder({double fixedWidth = 200, double fixedHeight = 200}) {
   return Container(
     width: fixedWidth,
     height: fixedHeight,
-    color: customAccentBleu1278.withOpacity(0.15),
+    color: customRouge.withOpacity(0.15),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
       child: Stack(children: [
         Placeholder(
-          color: customAccentBleu1278.withOpacity(0.5),
+          color: customRouge.withOpacity(0.5),
           strokeWidth: 1,
         ),
         Center(
@@ -34,7 +34,7 @@ Widget myPlaceholder({double fixedWidth = 200, double fixedHeight = 200}) {
             decoration: BoxDecoration(
                 border: Border.all(
                   width: 5,
-                  color: customAccentBleu1278.withOpacity(0.35),
+                  color: customRouge.withOpacity(0.35),
                 ),
                 color: Colors.white,
                 // Make rounded corners
@@ -44,8 +44,8 @@ Widget myPlaceholder({double fixedWidth = 200, double fixedHeight = 200}) {
               child: Text(
                 "WORK IN PROGRESS",
                 textScaleFactor: 1.3 * (fixedWidth / 200),
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: customAccentBleu1278),
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: customRouge),
               ),
             ),
           ),
@@ -59,10 +59,10 @@ Widget surroundedColumn(List<Widget> widgets, {double fixedHeight = 100}) {
   return Container(
     height: fixedHeight,
     decoration: BoxDecoration(
-        color: customVert1278.withOpacity(0.1),
+        color: customRouge.withOpacity(0.1),
         border: Border.all(
           width: 1,
-          color: customVert1278,
+          color: customRouge,
         ),
         // Make rounded corners
         borderRadius: BorderRadius.circular(5)),

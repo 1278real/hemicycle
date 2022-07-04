@@ -106,10 +106,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       }
     }
 
-    print("legendItems = " +
-        legendItems.toString() +
-        " / legendMaxSize = " +
-        legendMaxSize.toString());
+    // print("legendItems = " + legendItems.toString() + " / legendMaxSize = " + legendMaxSize.toString());
 
     int _legendCols =
         math.min(legendItems, ((maxCharactersInRow / legendMaxSize).floor()));
@@ -120,10 +117,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       legendRows = math.max(minLegendRows!, legendRows);
     }
 
-    print("legendCols = " +
-        legendCols.toString() +
-        " / legendRows = " +
-        legendRows.toString());
+    // print("legendCols = " + legendCols.toString() + " / legendRows = " + legendRows.toString());
 
     return Container(
         width: MediaQuery.of(context).size.width * assemblyWidth,
@@ -332,7 +326,7 @@ class AssemblyPainter extends CustomPainter {
 
       double minimum = assemblyElements.toDouble();
       for (var z = 0; z < rowFilled.length; z++) {
-        if (paletteColors[i] == customRougeNupes) {
+        if (paletteColors[i] == customRouge) {
           // print(rowFilled[z].toString() + " @ z=" + z.toString());
         }
         if ((rowFilled[z] <= (nbElementsPerRow[z] * progress)) &&
@@ -340,7 +334,7 @@ class AssemblyPainter extends CustomPainter {
           minimum = rowFilled[z] / nbElementsPerRow[z];
           localRow = z;
         } else {
-          if (paletteColors[i] == customRougeNupes) {
+          if (paletteColors[i] == customRouge) {
             /*
             print("-----" +
                 (nbElementsPerRow[z] * progress).toString() +
@@ -356,7 +350,7 @@ class AssemblyPainter extends CustomPainter {
         rowFilled[localRow] += 1;
         theElementsAttributes.add(
             ElementAttributes(i, localRow, localPosition, paletteColors[i]));
-        if (paletteColors[i] == customRougeNupes) {
+        if (paletteColors[i] == customRouge) {
           // print(localRow.toString() + "/" + localPosition.toString());
           // print(rowFilled.toString());
         }
