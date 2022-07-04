@@ -236,9 +236,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                       math.sin(
                                           assemblyAngle / 360 * 2 * math.pi))) /
                               2)) *
-                      ((legendRows * 0.3) + (withTitle ? 0.2 : 0)),
+                      ((legendRows * 0.2) + (withTitle ? 0.2 : 0)),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (withTitle && title != null)
                         Padding(
@@ -387,7 +388,6 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   ]),
                             ),
                           ]),
-                      Padding(padding: EdgeInsets.all(3)),
                       Row(
                         children: [
                           Container(width: 10, height: 10, color: customNoVote),
@@ -411,7 +411,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                       assemblyAngle / 360 * 2 * math.pi))) /
                           2)) *
                   (((legendRows *
-                              (groupSectors != null ? 0.1 : 0.15) /
+                              (groupSectors != null ? 0.1 : 0.1) /
                               assemblyWidth) +
                           (withTitle ? (0.15 / assemblyWidth) : 0)) +
                       1.15),
