@@ -112,6 +112,10 @@ class _HemicycleState extends State<Hemicycle> {
 }
 ```
 
+| ![Image](https://github.com/1278real/hemicycle/blob/55196e4a7ade0f60c25dbbf5b3a8e7e5179374d9/assets/test_groups.png) | ![Image](https://github.com/1278real/hemicycle/blob/55196e4a7ade0f60c25dbbf5b3a8e7e5179374d9/assets/test_votes.png) |
+| :------------: | :------------: |
+| **Exemple** group sectors | **Exemple** individual votes |
+
 ## Additional information
 
 Further infos soon ;-)
