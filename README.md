@@ -18,6 +18,8 @@ The number of dots is up to you, by default 577 as for the French National Assem
 
 You can change the number of seats, the arc of the circle (by default, 170°) and, with the specific type of inputs, you can display individual voters or sectors for group appearance...
 
+![Image](https://github.com/1278real/hemicycle/assets/groupes.png)
+
 ## Getting started
 
 Add this in your ```pubspec.yaml``` :
