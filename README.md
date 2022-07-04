@@ -30,67 +30,64 @@ Then use ```DrawHemicycle``` to get the semi-circle assembly representation.
 
 ```dart
 class _HemicycleState extends State<Hemicycle> {
-  int numberTest = 0;
-  int resteTest = 0;
+    int numberTest = 0;
+    int resteTest = 0;
 
-  List<GroupSectors> hemicycleTest = [
-      GroupSectors(numberTest, customVert, description: "BEFORE"),
-      GroupSectors(1, customRouge, description: "NEW"),
-      GroupSectors(resteTest, customMiddleGrey1278, description: "AFTER")
+    List<GroupSectors> hemicycleTest = [
+        GroupSectors(numberTest, customVert, description: "BEFORE"),
+        GroupSectors(1, customRouge, description: "NEW"),
+        GroupSectors(resteTest, customMiddleGrey1278, description: "AFTER")
     ];
 
-  @override
-  void initState() {
-    numberTest = 1;
-    resteTest = 577 - numberTest - 1;
+    @override
+    void initState() {
+        numberTest = 1;
+        resteTest = 577 - numberTest - 1;
 
-    updateAndRefresh();
-    super.initState();
-  }
-  
-  void updateAndRefresh() async {
-    Future.delayed(Duration(milliseconds: 100), (() {
-      setState(() {
-            if (boolean) {
-              datasUpdated = true;
-            }
-          });
-    }));
-  }
+        updateAndRefresh();
+        super.initState();
+    }
+    
+    void updateAndRefresh() async {
+        Future.delayed(Duration(milliseconds: 100), (() {
+            setState(() {
+                if (boolean) {
+                datasUpdated = true;
+                }
+            });
+        }));
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          if (datasUpdated)
-                  DrawHemicycle(
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+        body: Column(
+            children: <Widget>[
+            if (datasUpdated)
+                DrawHemicycle(
                     resteTest + numberTest + 1,
                     nbRows: ((resteTest + numberTest + 1) / 50).ceil(),
                     groupSectors: hemicycleTest,
                     withLegend: true,
                     withTitle: true,
                     title: "TEST",
-                  ),
+                ),
                 TextButton(
                     onPressed: () {
-                      setState(() {
+                    setState(() {
                         numberTest += 1;
                         datasUpdated = false;
-                      });
-                      updateAndRefresh();
+                    });
+                    updateAndRefresh();
                     },
                     child:
                         Text(("PLUS UN... (" + numberTest.toString() + ")"))),
-        ],
-      ),
-    );
-  }
+            ]),
+        );
+    }
 }
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+Further infos soon ;-)
