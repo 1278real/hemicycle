@@ -340,21 +340,6 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         ),
                                       ],
                                     ),
-                                    Padding(padding: EdgeInsets.all(8)),
-                                    Row(
-                                      children: [
-                                        Container(
-                                            width: 10,
-                                            height: 10,
-                                            color: customNoVote),
-                                        Padding(padding: EdgeInsets.all(2)),
-                                        Text(
-                                          "pas de vote inscrit",
-                                          style: TextStyle(
-                                              fontStyle: FontStyle.italic),
-                                        ),
-                                      ],
-                                    ),
                                   ]),
                             ),
                             Padding(
@@ -401,6 +386,17 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   ]),
                             ),
                           ]),
+                      Padding(padding: EdgeInsets.all(8)),
+                      Row(
+                        children: [
+                          Container(width: 10, height: 10, color: customNoVote),
+                          Padding(padding: EdgeInsets.all(2)),
+                          Text(
+                            "pas de vote inscrit",
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                        ],
+                      ),
                     ],
                   )),
             Container(
