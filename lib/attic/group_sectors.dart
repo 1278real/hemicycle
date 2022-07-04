@@ -10,7 +10,9 @@ class GroupSectors with IterableMixin<GroupSectors> {
   /// ## Creates a group of dots a.k.a sector that has the same color :
   ///
   /// • [nbElements] is the number of elements that should be colored that way.
+  ///
   /// • [sectorColor] is the color of the group.
+  ///
   /// • [description] is the String used in the Legend if displayed. if not provided, replaced by the Color description #RRGGBB.
   GroupSectors(this.nbElements, this.sectorColor, {this.description});
 
