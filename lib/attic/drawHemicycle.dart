@@ -278,7 +278,7 @@ class AssemblyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     List<Color> paletteColors = List.generate(
-        assemblyElements, (index) => Color.fromRGBO(50, 50, 50, 1));
+        assemblyElements, (index) => Color.fromARGB(255, 210, 210, 210));
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
