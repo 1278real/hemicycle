@@ -172,8 +172,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                       math.sin(
                                           assemblyAngle / 360 * 2 * math.pi))) /
                               2)) *
-                      ((legendRows * (groupSectors != null ? 0.2 : 0.3)) +
-                          (withTitle ? 0.2 : 0)),
+                      ((legendRows * 0.2) + (withTitle ? 0.2 : 0)),
                   child: Column(
                     children: [
                       if (withTitle && title != null)
@@ -236,7 +235,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                       math.sin(
                                           assemblyAngle / 360 * 2 * math.pi))) /
                               2)) *
-                      ((legendRows * 0.15) + (withTitle ? 0.2 : 0)),
+                      ((legendRows * 0.25) + (withTitle ? 0.2 : 0)),
                   child: Column(
                     children: [
                       if (withTitle && title != null)
