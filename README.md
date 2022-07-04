@@ -20,8 +20,13 @@ You can change the number of seats (by default, 577), the arc of the circle (by 
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+Add this in your ```pubspec.yaml``` :
+```dart
+    dependencies:
+    (...)
+        hemicycle:
+            git: https://github.com/1278real/hemicycle
+```
 
 ## Usage
 
