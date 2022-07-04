@@ -9,7 +9,7 @@ import 'helpers.dart';
 import 'individual_votes.dart';
 
 class DrawHemicycle extends StatefulWidget {
-  int assemblyElements;
+  final int assemblyElements;
   final double? assemblyAngle;
   final double? assemblyWidth;
   final List<IndividualVotes>? individualVotes;

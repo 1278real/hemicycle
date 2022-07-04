@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hemicycle/attic/colors.dart';
+import 'colors.dart';
 
 class IndividualVotes {
   int index;
