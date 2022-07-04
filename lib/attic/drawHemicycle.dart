@@ -5,6 +5,7 @@ import 'dart:collection';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:math' as math;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:quiver/iterables.dart';
@@ -268,7 +269,16 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteFor),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("POUR\n≠ groupe"),
+                                        Column(
+                                          children: [
+                                            Text("POUR"),
+                                            Text(
+                                              "≠ groupe",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -279,7 +289,16 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color:
                                                 customVoteFor.withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("POUR\n=  groupe"),
+                                        Column(
+                                          children: [
+                                            Text("POUR"),
+                                            Text(
+                                              "= groupe",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ]),
@@ -297,7 +316,16 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteAgainst),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("CONTRE\n≠ groupe"),
+                                        Column(
+                                          children: [
+                                            Text("CONTRE"),
+                                            Text(
+                                              "≠ groupe",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -308,7 +336,16 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color: customVoteAgainst
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("CONTRE\n= groupe"),
+                                        Column(
+                                          children: [
+                                            Text("CONTRE"),
+                                            Text(
+                                              "= groupe",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -318,7 +355,11 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customNoVote),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("PAS DE VOTE"),
+                                        Text(
+                                          "pas de vote isncrit",
+                                          style: TextStyle(
+                                              fontStyle: FontStyle.italic),
+                                        ),
                                       ],
                                     ),
                                   ]),
@@ -336,7 +377,16 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteAbstention),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("ABST.\n≠ groupe"),
+                                        Column(
+                                          children: [
+                                            Text("ABST°"),
+                                            Text(
+                                              "≠ groupe",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -347,7 +397,16 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color: customVoteAbstention
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("ABST.\n= groupe"),
+                                        Column(
+                                          children: [
+                                            Text("ABST°"),
+                                            Text(
+                                              "= groupe",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ]),
