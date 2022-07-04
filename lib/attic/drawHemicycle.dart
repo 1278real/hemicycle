@@ -190,7 +190,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                     0.1)),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             for (var i = 0; i < legendCols; i++)
                               Padding(
@@ -253,7 +253,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                     0.1)),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
                               padding: EdgeInsets.all(6),
@@ -268,7 +268,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteFor),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("POUR ≠ groupe"),
+                                        Text("POUR\n≠ groupe"),
                                       ],
                                     ),
                                     Row(
@@ -279,7 +279,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color:
                                                 customVoteFor.withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("POUR = groupe"),
+                                        Text("POUR\n=  groupe"),
                                       ],
                                     ),
                                   ]),
@@ -297,7 +297,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteAgainst),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("CONTRE ≠ groupe"),
+                                        Text("CONTRE\n≠ groupe"),
                                       ],
                                     ),
                                     Row(
@@ -308,7 +308,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color: customVoteAgainst
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("CONTRE = groupe"),
+                                        Text("CONTRE\n= groupe"),
                                       ],
                                     ),
                                     Row(
@@ -336,7 +336,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteAbstention),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("ABST. ≠ groupe"),
+                                        Text("ABST.\n≠ groupe"),
                                       ],
                                     ),
                                     Row(
@@ -347,7 +347,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color: customVoteAbstention
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Text("ABST. = groupe"),
+                                        Text("ABST.\n= groupe"),
                                       ],
                                     ),
                                   ]),
