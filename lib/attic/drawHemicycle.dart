@@ -29,7 +29,7 @@ class DrawHemicycle extends StatefulWidget {
   String? title;
   int? nbRows;
 
-  /// ## Creates a widget with Assembly view defined by these parameters :
+  /// # Creates a widget with Assembly view defined by these parameters :
   ///
   /// • [assemblyElements] is the number of elements to draw. It is required.
   ///
@@ -281,9 +281,39 @@ class AssemblyPainter extends CustomPainter {
         assemblyElements, (index) => Color.fromRGBO(50, 50, 50, 1));
 
     if (individualVotes != null) {
+      List<GroupPairing> groupPairingVotes = [];
       for (IndividualVotes element in individualVotes!) {
-        paletteColors[element.index - 1] =
-            element.voteColor ?? Color.fromRGBO(255, 255, 255, 1);
+        bool needsCreate = true;
+        for (GroupPairing group in groupPairingVotes) {
+          if (group.groupPairing == element.groupPairing) {
+            needsCreate = false;
+            if (element.voteResult == null) {
+              group.valueAbstention = (group.valueAbstention ?? 0) + 1;
+            } else if (element.voteResult == true) {
+              group.valueFor = (group.valueFor ?? 0) + 1;
+            } else {
+              group.valueAgainst = (group.valueAgainst ?? 0) + 1;
+            }
+          }
+        }
+        if (needsCreate && element.groupPairing != null) {
+          groupPairingVotes.add(GroupPairing(element.groupPairing!,
+              valueAbstention: element.voteResult == null ? 1 : null,
+              valueFor: element.voteResult == true ? 1 : null,
+              valueAgainst: element.voteResult == false ? 1 : null));
+        }
+      }
+      for (IndividualVotes element in individualVotes!) {
+        paletteColors[element.index - 1] = element.voteColor;
+        for (GroupPairing group in groupPairingVotes) {
+          if (group.groupPairing == element.groupPairing) {
+            if (group.groupChoice == element.voteResult) {
+              print("##### group.groupChoice == element.voteResult");
+            } else {
+              print("##### group.groupChoice ≠ element.voteResult");
+            }
+          }
+        }
       }
     } else if (groupSectors != null) {
       int offset = 0;
