@@ -1,6 +1,6 @@
 name: hemicycle
 description: Draw a semi-circle assembly representation.
-version: 0.0.8
+version: 0.0.9
 homepage:
 repository: https://github.com/1278real/hemicycle
 
@@ -19,12 +19,3 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-
-flutter:
-  plugin:
-    platforms:
-      android:
-        package: solutions.1278reeal.hemicycle
-        pluginClass: HemicyclePlugin
-      ios:
-        pluginClass: HemicyclePlugin
