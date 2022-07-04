@@ -1,3 +1,4 @@
-## 0.0.1
+## 0.0.1 to 0.0.8
 
-* TODO: Describe initial release.
+* First commits.
+* git cleaning before publish.
