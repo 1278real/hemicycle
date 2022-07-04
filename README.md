@@ -11,12 +11,12 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-The purpose of this package is to draw a full-width (embed in Container to resize) representation of a semi-circle assembly...
+The purpose of this Flutter package is to draw a full-width (embed in Container to resize) representation of a semi-circle assembly...
 The number of dots is up to you, by default 577 as for the French National Assembly.
 
 ## Features
 
-You can change the number of seats (by default, 577), the arc of the circle (by default, 175°) and, with the specific type of inputs, you can display individual voters or sectors for group appearance...
+You can change the number of seats, the arc of the circle (by default, 170°) and, with the specific type of inputs, you can display individual voters or sectors for group appearance...
 
 ## Getting started
 

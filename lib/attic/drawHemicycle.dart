@@ -17,7 +17,10 @@ import 'helpers.dart';
 import 'individual_votes.dart';
 
 class DrawHemicycle extends StatefulWidget {
+  /// `assemblyElements` is the number of elements to draw. It is mandatory.
   int assemblyElements;
+
+  /// `assemblyAngle` is the value of the arc of the Assembly expressed in degrees. By default, if not provided, it is 170°.
   double? assemblyAngle;
   double? assemblyWidth;
   List<IndividualVotes>? individualVotes;
