@@ -279,6 +279,8 @@ class AssemblyPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     List<Color> paletteColors = List.generate(
         assemblyElements, (index) => Color.fromARGB(255, 210, 210, 210));
+    List<Color> paletteParentColors = List.generate(
+        assemblyElements, (index) => Color.fromARGB(255, 210, 210, 210));
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
@@ -310,8 +312,10 @@ class AssemblyPainter extends CustomPainter {
             if (group.groupChoice == element.voteResult) {
               print("##### group.groupChoice == element.voteResult");
             } else {
-              print("##### group.groupChoice ≠ element.voteResult");
+              print("##### group.groupChoice ≠ element.voteResult @ " +
+                  element.index.toString());
             }
+            paletteParentColors[element.index - 1] = group.groupChoiceColor;
           }
         }
       }
@@ -397,8 +401,11 @@ class AssemblyPainter extends CustomPainter {
       if (localRow != null) {
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
-        theElementsAttributes.add(
-            ElementAttributes(i, localRow, localPosition, paletteColors[i]));
+        theElementsAttributes.add(ElementAttributes(
+            i, localRow, localPosition, paletteColors[i],
+            parentColor: (paletteParentColors[i] != null
+                ? paletteParentColors[i]
+                : null)));
         if (paletteColors[i] == customRouge) {
           // print(localRow.toString() + "/" + localPosition.toString());
           // print(rowFilled.toString());
@@ -408,10 +415,11 @@ class AssemblyPainter extends CustomPainter {
 
     // print("0 / test = " + rowFilled.toString());
 
+/*
     for (ElementAttributes element in theElementsAttributes) {
-      // print(element.row.toString() + " / " + element.position.toString());
+      print(element.row.toString() + " / " + element.position.toString());
     }
-
+*/
     for (var i = 0; i < nbRows; i++) {
       drawArc(canvas, size,
           elementAttributeRow: i,
@@ -446,7 +454,15 @@ class AssemblyPainter extends CustomPainter {
       if (elementAttributeRow != null && allElementAttributes != null) {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow && element.position == 0) {
-            color = element.elementColor;
+            if (element.parentColor != null &&
+                element.parentColor == element.elementColor) {
+              color = element.elementColor.withOpacity(0.3);
+            } else if (element.parentColor != null &&
+                element.parentColor != element.elementColor) {
+              color = element.elementColor;
+            } else {
+              color = element.elementColor;
+            }
           }
         }
       }
@@ -467,7 +483,15 @@ class AssemblyPainter extends CustomPainter {
       if (elementAttributeRow != null && allElementAttributes != null) {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow && element.position == 0) {
-            color = element.elementColor;
+            if (element.parentColor != null &&
+                element.parentColor == element.elementColor) {
+              color = element.elementColor.withOpacity(0.3);
+            } else if (element.parentColor != null &&
+                element.parentColor != element.elementColor) {
+              color = element.elementColor;
+            } else {
+              color = element.elementColor;
+            }
           }
         }
       }
@@ -489,7 +513,15 @@ class AssemblyPainter extends CustomPainter {
         if (elementAttributeRow != null && allElementAttributes != null) {
           for (ElementAttributes element in allElementAttributes) {
             if (element.row == elementAttributeRow && element.position == i) {
-              color = element.elementColor;
+              if (element.parentColor != null &&
+                  element.parentColor == element.elementColor) {
+                color = element.elementColor.withOpacity(0.3);
+              } else if (element.parentColor != null &&
+                  element.parentColor != element.elementColor) {
+                color = element.elementColor;
+              } else {
+                color = element.elementColor;
+              }
             }
           }
         }
@@ -509,7 +541,15 @@ class AssemblyPainter extends CustomPainter {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow &&
               element.position == maxLoop + 1) {
-            color = element.elementColor;
+            if (element.parentColor != null &&
+                element.parentColor == element.elementColor) {
+              color = element.elementColor.withOpacity(0.3);
+            } else if (element.parentColor != null &&
+                element.parentColor != element.elementColor) {
+              color = element.elementColor;
+            } else {
+              color = element.elementColor;
+            }
           }
         }
       }
