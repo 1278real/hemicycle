@@ -238,6 +238,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                               2)) *
                       ((legendRows * 0.3) + (withTitle ? 0.2 : 0)),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       if (withTitle && title != null)
                         Padding(
@@ -386,7 +387,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   ]),
                             ),
                           ]),
-                      Padding(padding: EdgeInsets.all(8)),
+                      Padding(padding: EdgeInsets.all(3)),
                       Row(
                         children: [
                           Container(width: 10, height: 10, color: customNoVote),
