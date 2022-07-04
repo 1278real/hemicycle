@@ -1,12 +1,6 @@
-import 'dart:collection';
-import 'dart:developer';
-import 'dart:io';
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:quiver/iterables.dart';
-import 'package:quiver/strings.dart';
 
 import 'colors.dart';
 import 'element_attributes.dart';

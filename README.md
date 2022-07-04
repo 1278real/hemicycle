@@ -28,7 +28,7 @@ Add this in your ```pubspec.yaml``` :
 ```dart
     dependencies:
     (...)
-       hemicycle: ^0.0.21
+       hemicycle: ^0.0.23
 ```
 
 ## Then
