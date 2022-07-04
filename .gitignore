@@ -15,6 +15,7 @@ doc/api/
 
 # dotenv environment variables file
 .env*
+.idea
 
 # Avoid committing generated Javascript files:
 *.dart.js
