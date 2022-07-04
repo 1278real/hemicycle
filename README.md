@@ -22,19 +22,19 @@ The number of dots is up to you, by default 577 as for the French National Assem
 
 You can change the number of seats, the arc of the circle (by default, 170°) and, with the specific type of inputs, you can display individual voters or sectors for group appearance...
 
-## Getting started
+## First
 
 Add this in your ```pubspec.yaml``` :
 ```dart
     dependencies:
     (...)
-        hemicycle:
-            git: https://github.com/1278real/hemicycle
+       hemicycle: ^0.0.21
 ```
 
-## Usage
+## Then
 
 Create a ```List<GroupSectors>``` containing every sectors you want to draw.
+OR create a ```List<IndividualVotes>``` containing every individual vote you want to draw.
 Then use ```DrawHemicycle``` to get the semi-circle assembly representation. 
 
 ```dart

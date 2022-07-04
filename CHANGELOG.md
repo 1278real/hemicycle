@@ -1,6 +1,14 @@
+## 0.0.21
+
+* Updating README.md and description...
+
+## 0.0.20
+
+* Updating informations for pub.dev scoring...
+
 ## 0.0.19
 
-* Adding informations por pub.dev page...
+* Adding informations for pub.dev page...
 
 ## 0.0.18
 

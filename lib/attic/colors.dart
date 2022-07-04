@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'helpers.dart';
-
 extension ColorExtension on String {
   toColor() {
     var hexColor = this.replaceAll("#", "");
