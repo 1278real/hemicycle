@@ -121,20 +121,20 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
           }
         }
       }
+
+      // print("legendItems = " + legendItems.toString() + " / legendMaxSize = " + legendMaxSize.toString());
+
+      int _legendCols =
+          math.min(legendItems, ((maxCharactersInRow / legendMaxSize).floor()));
+      legendRows = (legendItems / _legendCols).ceil();
+      legendCols = (legendItems / legendRows).ceil();
+
+      if (minLegendRows != null) {
+        legendRows = math.max(minLegendRows!, legendRows);
+      }
+
+      // print("legendCols = " + legendCols.toString() + " / legendRows = " + legendRows.toString());
     }
-
-    // print("legendItems = " + legendItems.toString() + " / legendMaxSize = " + legendMaxSize.toString());
-
-    int _legendCols =
-        math.min(legendItems, ((maxCharactersInRow / legendMaxSize).floor()));
-    legendRows = (legendItems / _legendCols).ceil();
-    legendCols = (legendItems / legendRows).ceil();
-
-    if (minLegendRows != null) {
-      legendRows = math.max(minLegendRows!, legendRows);
-    }
-
-    // print("legendCols = " + legendCols.toString() + " / legendRows = " + legendRows.toString());
 
     return Container(
         width: MediaQuery.of(context).size.width * assemblyWidth,
