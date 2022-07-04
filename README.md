@@ -48,6 +48,21 @@ class _HemicycleState extends State<Hemicycle> {
         GroupSectors(resteTest, customMiddleGrey1278, description: "AFTER")
     ];
 
+    List<IndividualVotes> votesTest = [
+      IndividualVotes(33, voteResult: true, groupPairing: "AAA"),
+      IndividualVotes(34, voteResult: true, groupPairing: "AAA"),
+      IndividualVotes(35, voteResult: false, groupPairing: "AAA"),
+      IndividualVotes(36, voteResult: true, groupPairing: "AAA"),
+      IndividualVotes(37, voteResult: false, groupPairing: "AAA"),
+      IndividualVotes(88, voteResult: true, groupPairing: "MMM"),
+      IndividualVotes(89, voteResult: false, groupPairing: "MMM"),
+      IndividualVotes(90, voteResult: false, groupPairing: "MMM"),
+      IndividualVotes(122, voteResult: false, groupPairing: "ZZZ"),
+      IndividualVotes(123, voteResult: false, groupPairing: "ZZZ"),
+      IndividualVotes(124, voteResult: true, groupPairing: "ZZZ"),
+      IndividualVotes(126, voteResult: true, groupPairing: "ZZZ"),
+    ];
+
     @override
     void initState() {
         numberTest = 1;
@@ -70,6 +85,8 @@ class _HemicycleState extends State<Hemicycle> {
         return Scaffold(
         body: Column(
             children: <Widget>[
+            if (datasUpdated)
+                DrawHemicycle(200, nbRows: 8, individualVotes: votesTest, withLegend: true),
             if (datasUpdated)
                 DrawHemicycle(
                     resteTest + numberTest + 1,
