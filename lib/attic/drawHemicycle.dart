@@ -134,6 +134,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       }
 
       // print("legendCols = " + legendCols.toString() + " / legendRows = " + legendRows.toString());
+    } else if (withLegend && individualVotes != null) {
+      legendItems = 7;
+      legendRows = 3;
+      legendCols = 3;
     }
 
     return Container(
@@ -221,6 +225,136 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                           ]),
                     ],
                   )),
+            if (withLegend && individualVotes != null)
+              Container(
+                  width: MediaQuery.of(context).size.width * assemblyWidth,
+                  height: (MediaQuery.of(context).size.width *
+                          (math.max(
+                                  1.0,
+                                  (1 -
+                                      math.sin(
+                                          assemblyAngle / 360 * 2 * math.pi))) /
+                              2)) *
+                      ((legendRows * 0.15) + (withTitle ? 0.2 : 0)),
+                  child: Column(
+                    children: [
+                      if (withTitle && title != null)
+                        Padding(
+                            padding: EdgeInsets.all(
+                                (MediaQuery.of(context).size.width *
+                                        (math.max(
+                                                1.0,
+                                                (1 -
+                                                    math.sin(assemblyAngle /
+                                                        360 *
+                                                        2 *
+                                                        math.pi))) /
+                                            2)) *
+                                    0.1)),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color: customVoteFor),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("POUR ≠ groupe"),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color:
+                                                customVoteFor.withOpacity(0.3)),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("POUR = groupe"),
+                                      ],
+                                    ),
+                                  ]),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color: customVoteAgainst),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("CONTRE ≠ groupe"),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color: customVoteAgainst
+                                                .withOpacity(0.3)),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("CONTRE = groupe"),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color: customNoVote),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("PAS DE VOTE"),
+                                      ],
+                                    ),
+                                  ]),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(6),
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color: customVoteAbstention),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("ABST. ≠ groupe"),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                            width: 10,
+                                            height: 10,
+                                            color: customVoteAbstention
+                                                .withOpacity(0.3)),
+                                        Padding(padding: EdgeInsets.all(2)),
+                                        Text("ABST. = groupe"),
+                                      ],
+                                    ),
+                                  ]),
+                            ),
+                          ]),
+                    ],
+                  )),
             Container(
               width: MediaQuery.of(context).size.width * assemblyWidth,
               height: (MediaQuery.of(context).size.width *
@@ -277,10 +411,10 @@ class AssemblyPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    List<Color> paletteColors = List.generate(
-        assemblyElements, (index) => Color.fromARGB(255, 210, 210, 210));
-    List<Color> paletteParentColors = List.generate(
-        assemblyElements, (index) => Color.fromARGB(255, 210, 210, 210));
+    List<Color> paletteColors =
+        List.generate(assemblyElements, (index) => customNoVote);
+    List<Color> paletteParentColors =
+        List.generate(assemblyElements, (index) => customNoVote);
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];

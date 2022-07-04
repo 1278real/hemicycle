@@ -39,3 +39,8 @@ MaterialColor customBronze = MaterialColor(0xFFbf8f58, color);
 MaterialColor customGoldHigh = MaterialColor(0xFFf9f19a, color);
 MaterialColor customSilverHigh = MaterialColor(0xFFebe9ea, color);
 MaterialColor customBronzeHigh = MaterialColor(0xFFf6ead2, color);
+
+MaterialColor customVoteFor = MaterialColor(0xFF099509, color);
+MaterialColor customVoteAgainst = MaterialColor(0xFFA00D0B, color);
+MaterialColor customVoteAbstention = MaterialColor(0xFF616161, color);
+MaterialColor customNoVote = MaterialColor(0xFFD2D2D2, color);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hemicycle/attic/colors.dart';
 
 class IndividualVotes {
   int index;
@@ -7,12 +8,12 @@ class IndividualVotes {
 
   Color get voteColor {
     if (voteResult == null) {
-      return Color.fromARGB(255, 97, 97, 97);
+      return customVoteAbstention;
     } else {
       if (voteResult == true) {
-        return Color.fromARGB(255, 9, 149, 9);
+        return customVoteFor;
       } else {
-        return Color.fromARGB(255, 160, 13, 11);
+        return customVoteAgainst;
       }
     }
   }
@@ -41,12 +42,12 @@ class GroupPairing {
 
   Color get groupChoiceColor {
     if (groupChoice == null) {
-      return Color.fromARGB(255, 97, 97, 97);
+      return customVoteAbstention;
     } else {
       if (groupChoice == true) {
-        return Color.fromARGB(255, 9, 149, 9);
+        return customVoteFor;
       } else {
-        return Color.fromARGB(255, 160, 13, 11);
+        return customVoteAgainst;
       }
     }
   }
