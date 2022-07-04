@@ -262,6 +262,12 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      "POUR",
+                                      style: TextStyle(
+                                          color: customVoteFor,
+                                          fontWeight: FontWeight.w900),
+                                    ),
                                     Row(
                                       children: [
                                         Container(
@@ -269,15 +275,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteFor),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Column(
-                                          children: [
-                                            Text("POUR"),
-                                            Text(
-                                              "≠ groupe",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
+                                        Text(
+                                          "≠ groupe",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700),
                                         ),
                                       ],
                                     ),
@@ -289,15 +290,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color:
                                                 customVoteFor.withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Column(
-                                          children: [
-                                            Text("POUR"),
-                                            Text(
-                                              "= groupe",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
+                                        Text(
+                                          "= groupe",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700),
                                         ),
                                       ],
                                     ),
@@ -367,6 +363,12 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Text(
+                                      "ABST°",
+                                      style: TextStyle(
+                                          color: customVoteAbstention,
+                                          fontWeight: FontWeight.w900),
+                                    ),
                                     Row(
                                       children: [
                                         Container(
@@ -374,15 +376,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             height: 10,
                                             color: customVoteAbstention),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Column(
-                                          children: [
-                                            Text("ABST°"),
-                                            Text(
-                                              "≠ groupe",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
+                                        Text(
+                                          "≠ groupe",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700),
                                         ),
                                       ],
                                     ),
@@ -394,15 +391,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                             color: customVoteAbstention
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
-                                        Column(
-                                          children: [
-                                            Text("ABST°"),
-                                            Text(
-                                              "= groupe",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w700),
-                                            ),
-                                          ],
+                                        Text(
+                                          "= groupe",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w700),
                                         ),
                                       ],
                                     ),
