@@ -16,6 +16,7 @@ class GroupSectors with IterableMixin<GroupSectors> {
   /// • [description] is a nullable String used in the Legend if displayed. If not provided, replaced by the [sectorColor] description #RRGGBB.
   GroupSectors(this.nbElements, this.sectorColor, {this.description});
 
+  /// [sectorColorString] is the default String if no description is provided for Legend :
   String get sectorColorString {
     return "#" +
         sectorColor.red.toRadixString(16) +

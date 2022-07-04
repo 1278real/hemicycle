@@ -24,100 +24,51 @@ You can change the number of seats, the arc of the circle (by default, 170°) an
 
 ## Usage
 
-Create a ```List<GroupSectors>``` containing every sectors you want to draw.
-OR create a ```List<IndividualVotes>``` containing every individual vote you want to draw.
-Then use ```DrawHemicycle``` to get the semi-circle assembly representation. 
+Create a ```List<IndividualVotes>``` containing every individual vote you want to draw.
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-import 'package:hemicycle/hemicycle.dart';
-import 'package:hemicycle/attic/colors.dart';
-
-class HemicycleExample extends StatefulWidget {
-  @override
-  _HemicycleExampleState createState() => _HemicycleExampleState();
-}
-
-class _HemicycleExampleState extends State<HemicycleExample> {
-  int numberTest = 0;
-  int resteTest = 0;
-
-  bool datasUpdated = false;
-
-  List<GroupSectors> hemicycleTest = [];
-
-  List<IndividualVotes> votesTest = [];
-
-  @override
-  void initState() {
-    numberTest = 1;
-    resteTest = 577 - numberTest - 1;
-
-    List<GroupSectors> hemicycleTest = [
-      GroupSectors(numberTest, customVoteFor, description: "BEFORE"),
-      GroupSectors(1, customVoteAgainst, description: "NEW"),
-      GroupSectors(resteTest, customVoteAbstention, description: "AFTER")
-    ];
-
     List<IndividualVotes> votesTest = [
-      IndividualVotes(33, voteResult: true, groupPairing: "AAA"),
-      IndividualVotes(34, voteResult: true, groupPairing: "AAA"),
-      IndividualVotes(35, voteResult: false, groupPairing: "AAA"),
-      IndividualVotes(36, voteResult: true, groupPairing: "AAA"),
-      IndividualVotes(37, voteResult: false, groupPairing: "AAA"),
-      IndividualVotes(88, voteResult: true, groupPairing: "MMM"),
-      IndividualVotes(89, voteResult: false, groupPairing: "MMM"),
-      IndividualVotes(90, voteResult: false, groupPairing: "MMM"),
-      IndividualVotes(122, voteResult: false, groupPairing: "ZZZ"),
-      IndividualVotes(123, voteResult: false, groupPairing: "ZZZ"),
-      IndividualVotes(124, voteResult: true, groupPairing: "ZZZ"),
-      IndividualVotes(126, voteResult: true, groupPairing: "ZZZ"),
+        IndividualVotes(33, voteResult: true, groupPairing: "AAA"),
+        IndividualVotes(34, voteResult: true, groupPairing: "AAA"),
+        IndividualVotes(35, voteResult: false, groupPairing: "AAA"),
+        IndividualVotes(36, voteResult: true, groupPairing: "AAA"),
+        IndividualVotes(37, voteResult: false, groupPairing: "AAA"),
+        IndividualVotes(88, voteResult: true, groupPairing: "MMM"),
+        IndividualVotes(89, voteResult: false, groupPairing: "MMM"),
+        IndividualVotes(90, voteResult: false, groupPairing: "MMM"),
+        IndividualVotes(122, voteResult: false, groupPairing: "ZZZ"),
+        IndividualVotes(123, voteResult: false, groupPairing: "ZZZ"),
+        IndividualVotes(124, voteResult: true, groupPairing: "ZZZ"),
+        IndividualVotes(126, voteResult: true, groupPairing: "ZZZ"),
     ];
 
-    updateAndRefresh();
-    super.initState();
-  }
-
-  void updateAndRefresh() async {
-    Future.delayed(Duration(milliseconds: 100), (() {
-      setState(() {
-        datasUpdated = true;
-      });
-    }));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(children: <Widget>[
-        if (datasUpdated)
-          DrawHemicycle(200,
-              nbRows: 8, individualVotes: votesTest, withLegend: true),
-        if (datasUpdated)
-          DrawHemicycle(
-            resteTest + numberTest + 1,
-            nbRows: ((resteTest + numberTest + 1) / 50).ceil(),
-            groupSectors: hemicycleTest,
-            withLegend: true,
-            withTitle: true,
-            title: "TEST",
-          ),
-        TextButton(
-            onPressed: () {
-              setState(() {
-                numberTest += 1;
-                datasUpdated = false;
-              });
-              updateAndRefresh();
-            },
-            child: Text(("PLUS UN... (" + numberTest.toString() + ")"))),
-      ]),
-    );
-  }
-}
+    DrawHemicycle(200,
+        nbRows: 8, individualVotes: votesTest, withLegend: true);
 ```
+
+OR
+
+Create a ```List<GroupSectors>``` containing every sectors you want to draw.
+
+```dart
+    List<GroupSectors> hemicycleTest = [
+      GroupSectors(30, customVoteFor, description: "BEFORE"),
+      GroupSectors(50, customVoteAgainst, description: "NEW"),
+      GroupSectors(497, customVoteAbstention, description: "AFTER")
+    ];
+    
+    DrawHemicycle(
+        30 + 50 + 497,
+        nbRows: ((30 + 50 + 497) / 50).ceil(),
+        groupSectors: hemicycleTest,
+        withLegend: true,
+        withTitle: true,
+        title: "TEST",
+    );
+```
+
+Then use ```DrawHemicycle``` to get the semi-circle assembly representation. 
+
 
 | ![Image](https://github.com/1278real/hemicycle/blob/55196e4a7ade0f60c25dbbf5b3a8e7e5179374d9/assets/test_groups.png) | ![Image](https://github.com/1278real/hemicycle/blob/55196e4a7ade0f60c25dbbf5b3a8e7e5179374d9/assets/test_votes.png) |
 | :------------: | :------------: |

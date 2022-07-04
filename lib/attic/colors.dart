@@ -24,21 +24,18 @@ Map<int, Color> color = {
   800: Color.fromRGBO(0, 0, 0, .9),
   900: Color.fromRGBO(0, 0, 0, 1),
 };
-MaterialColor customRouge = MaterialColor(0xFF990000, color);
-MaterialColor customOrange = MaterialColor(0xFFDD7777, color);
-MaterialColor customFacebook = MaterialColor(0xFF3B5998, color);
-MaterialColor customTwitter = MaterialColor(0xFF00ACED, color);
-MaterialColor customLinkedin = MaterialColor(0xFF0072B1, color);
-MaterialColor customInstagram = MaterialColor(0xFFC13584, color);
-MaterialColor customYoutube = MaterialColor(0xFFC4302B, color);
-MaterialColor customGold = MaterialColor(0xFFc09c48, color);
-MaterialColor customSilver = MaterialColor(0xFFd0d0d2, color);
-MaterialColor customBronze = MaterialColor(0xFFbf8f58, color);
-MaterialColor customGoldHigh = MaterialColor(0xFFf9f19a, color);
-MaterialColor customSilverHigh = MaterialColor(0xFFebe9ea, color);
-MaterialColor customBronzeHigh = MaterialColor(0xFFf6ead2, color);
 
+/// RED color for standard warning
+MaterialColor customRouge = MaterialColor(0xFF990000, color);
+
+/// GREEN color for vote FOR
 MaterialColor customVoteFor = MaterialColor(0xFF099509, color);
+
+/// RED color for vote AGAINST
 MaterialColor customVoteAgainst = MaterialColor(0xFFA00D0B, color);
+
+/// MIDDLE GREY color for vote ABSTENTION
 MaterialColor customVoteAbstention = MaterialColor(0xFF616161, color);
+
+/// LIGHT GREY color for NO vote
 MaterialColor customNoVote = MaterialColor(0xFFD2D2D2, color);
