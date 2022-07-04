@@ -7,9 +7,20 @@ class GroupSectors with IterableMixin<GroupSectors> {
   Color sectorColor;
   String? description;
 
+  /// ## Creates a group of dots a.k.a sector that has the same color :
+  ///
+  /// • [nbElements] is the number of elements that should be colored that way.
+  /// • [sectorColor] is the color of the group.
+  /// • [description] is the String used in the Legend if displayed. if not provided, replaced by the Color description #RRGGBB.
   GroupSectors(this.nbElements, this.sectorColor, {this.description});
 
+  String get sectorColorString {
+    return "#" +
+        sectorColor.red.toRadixString(16) +
+        sectorColor.green.toRadixString(16) +
+        sectorColor.blue.toRadixString(16);
+  }
+
   @override
-  // TODO: implement iterator
   Iterator<GroupSectors> get iterator => throw UnimplementedError();
 }
