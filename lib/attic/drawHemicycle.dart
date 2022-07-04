@@ -388,16 +388,6 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   ]),
                             ),
                           ]),
-                      Row(
-                        children: [
-                          Container(width: 10, height: 10, color: customNoVote),
-                          Padding(padding: EdgeInsets.all(2)),
-                          Text(
-                            "pas de vote inscrit",
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ],
-                      ),
                     ],
                   )),
             Container(
