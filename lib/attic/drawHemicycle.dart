@@ -472,10 +472,9 @@ class AssemblyPainter extends CustomPainter {
         for (GroupPairing group in groupPairingVotes) {
           if (group.groupPairing == element.groupPairing) {
             if (group.groupChoice == element.voteResult) {
-              print("##### group.groupChoice == element.voteResult");
+              // print("##### group.groupChoice == element.voteResult");
             } else {
-              print("##### group.groupChoice ≠ element.voteResult @ " +
-                  element.index.toString());
+              // print("##### group.groupChoice ≠ element.voteResult @ " + element.index.toString());
             }
             paletteParentColors[element.index - 1] = group.groupChoiceColor;
           }

@@ -24,6 +24,27 @@ You can change the number of seats, the arc of the circle (by default, 170°) an
 
 ## Usage
 
+Create a ```List<GroupSectors>``` containing every sectors you want to draw.
+
+```dart
+    List<GroupSectors> hemicycleTest = [
+      GroupSectors(30, customVoteFor, description: "BEFORE"),
+      GroupSectors(50, customVoteAgainst, description: "NEW"),
+      GroupSectors(497, customVoteAbstention, description: "AFTER")
+    ];
+    
+    DrawHemicycle(
+        30 + 50 + 497,
+        nbRows: ((30 + 50 + 497) / 50).ceil(),
+        groupSectors: hemicycleTest,
+        withLegend: true,
+        withTitle: true,
+        title: "TEST",
+    );
+```
+
+OR
+
 Create a ```List<IndividualVotes>``` containing every individual vote you want to draw.
 
 ```dart
@@ -44,27 +65,6 @@ Create a ```List<IndividualVotes>``` containing every individual vote you want t
 
     DrawHemicycle(200,
         nbRows: 8, individualVotes: votesTest, withLegend: true);
-```
-
-OR
-
-Create a ```List<GroupSectors>``` containing every sectors you want to draw.
-
-```dart
-    List<GroupSectors> hemicycleTest = [
-      GroupSectors(30, customVoteFor, description: "BEFORE"),
-      GroupSectors(50, customVoteAgainst, description: "NEW"),
-      GroupSectors(497, customVoteAbstention, description: "AFTER")
-    ];
-    
-    DrawHemicycle(
-        30 + 50 + 497,
-        nbRows: ((30 + 50 + 497) / 50).ceil(),
-        groupSectors: hemicycleTest,
-        withLegend: true,
-        withTitle: true,
-        title: "TEST",
-    );
 ```
 
 Then use ```DrawHemicycle``` to get the semi-circle assembly representation. 
