@@ -19,7 +19,7 @@ class IndividualVotes {
     }
   }
 
-  /// # Creates individual dots that react with the group overall color :
+  /// ### Creates individual dots that react with the group overall color :
   ///
   /// • [index] is the increasing index starting at 0 for the dots from left to right.
   ///
@@ -35,7 +35,7 @@ class GroupPairing {
   int? valueAgainst;
   int? valueAbstention;
 
-  /// # Used by Individual Votes to make each dot react with the group overall color :
+  /// ### Used by Individual Votes to make each dot react with the group overall color :
   ///
   /// • [groupPairing] is the String that makes the group pairing work. You can set anything : just be sure that each dot that is supposed to compare with each other have the same String.
   ///

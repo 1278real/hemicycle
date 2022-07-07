@@ -21,7 +21,7 @@ class DrawHemicycle extends StatefulWidget {
   final String? title;
   final int? nbRows;
 
-  /// # Creates a widget with Assembly view defined by these parameters :
+  /// ### Creates a widget with Assembly view defined by these parameters :
   ///
   /// • [assemblyElements] is the number of elements to draw. It is required.
   ///

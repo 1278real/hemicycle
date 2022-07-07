@@ -7,7 +7,7 @@ class GroupSectors with IterableMixin<GroupSectors> {
   Color sectorColor;
   String? description;
 
-  /// # Creates a group of dots a.k.a sector that has the same color :
+  /// ### Creates a group of dots a.k.a sector that has the same color :
   ///
   /// • [nbElements] is the number of elements that should be colored that way.
   ///

@@ -1,19 +1,19 @@
 import 'dart:math';
 
 extension CapExtension on String {
-  /// CAPS for first character
+  /// ### CAPS for first character
   String get firstInCaps => '${this[0].toUpperCase()}${this.substring(1)}';
 
-  /// All characters in CAPS
+  /// ### All characters in CAPS
   String get allInCaps => this.toUpperCase();
 
-  /// All characters in lower case
+  /// ### All characters in lower case
   String get noneInCaps => this.toLowerCase();
 
-  /// CAPS for first character ONLY
+  /// ### CAPS for first character ONLY
   String get onlyFirstInCaps => this.noneInCaps.firstInCaps;
 
-  /// Help removing all accents for String comparison
+  /// ### Help removing all accents for String comparison
   String removeAccents() {
     String _toReturn = this;
 
@@ -36,15 +36,15 @@ extension CapExtension on String {
   }
 }
 
-/// Convert a String [dateString] to DateTime
+/// ### Convert a String [dateString] to DateTime
 ///
-/// You can specify the [dateSeparator], by default = "/"...
+/// • You can specify the [dateSeparator], by default = "/"...
 ///
-/// You can specify the [hourSeparator], by default = ":"...
+/// • You can specify the [hourSeparator], by default = ":"...
 ///
-/// You can tell if the String contains only the date by putting "true" to [noHour], by default = "false"...
+/// • You can tell if the String contains only the date by putting "true" to [noHour], by default = "false"...
 ///
-/// You can tell the String pattern in [format], by default = "DMY"...
+/// • You can tell the String pattern in [format], by default = "DMY"...
 ///
 DateTime dateFormatter(String dateString,
     {String dateSeparator = "/",
@@ -103,15 +103,15 @@ DateTime dateFormatter(String dateString,
   return _toReturn;
 }
 
-/// Convert a DateTime [date] to String (in French)
+/// ### Convert a DateTime [date] to String (in French)
 ///
-/// You can specify the [dateSeparator], by default = "/"...
+/// • You can specify the [dateSeparator], by default = "/"...
 ///
-/// You can specify the [hourSeparator], by default = ":"...
+/// • You can specify the [hourSeparator], by default = ":"...
 ///
-/// You can tell if the String needs to contain [dateOnly] or [hourOnly], by default = "false"...
+/// • You can tell if the String needs to contain [dateOnly] or [hourOnly], by default = "false"...
 ///
-/// You can tell if the String needs to be [longVersion] or [monthVersion] or [dayVersion], by default = "false"...
+/// • You can tell if the String needs to be [longVersion] or [monthVersion] or [dayVersion], by default = "false"...
 ///
 String dateStringFormatter(DateTime? date,
     {String dateSeparator = "/",

@@ -10,7 +10,7 @@ class ElementAttributes with IterableMixin<ElementAttributes> {
   Color? parentColor;
   String? description;
 
-  /// # Describes the parameters for each dot of the Assembly :
+  /// ### Describes the parameters for each dot of the Assembly :
   ///
   /// • [index] is the increasing index starting at 0 for the dots from left to right.
   ///
