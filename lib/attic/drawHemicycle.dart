@@ -496,6 +496,7 @@ class AssemblyPainter extends CustomPainter {
         }
       }
       if (groupSectors != null && (useGroupSector ?? false)) {
+        print("—————hemicycle————— step 1");
         for (GroupSectors element in groupSectors!) {
           paletteGroupColors.add(element.sectorColor);
           sectorGroupSize.add(element.nbElements);
@@ -617,6 +618,7 @@ class AssemblyPainter extends CustomPainter {
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
         groupSectors != null) {
+      print("—————hemicycle————— step 2");
       List<ElementAttributes> _localAttributes = [];
       int index = 0;
       for (var j = 0; j < paletteGroupColors.length; j++) {
@@ -626,6 +628,7 @@ class AssemblyPainter extends CustomPainter {
           index += 1;
         }
       }
+      print("—————hemicycle————— step 3");
       drawArc(canvas, size,
           elementAttributeRow: 0,
           allElementAttributes: _localAttributes,
