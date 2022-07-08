@@ -496,9 +496,9 @@ class AssemblyPainter extends CustomPainter {
           }
         }
       }
-      print("—————hemicycle————— step 0");
+      // print("—————hemicycle————— step 0");
       if (groupSectors != null && (useGroupSector ?? false)) {
-        print("—————hemicycle————— step 1");
+        // print("—————hemicycle————— step 1");
         for (GroupSectors element in groupSectors!) {
           paletteGroupColors.add(element.sectorColor);
           sectorGroupSize.add(element.nbElements);
@@ -620,7 +620,7 @@ class AssemblyPainter extends CustomPainter {
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
         groupSectors != null) {
-      print("—————hemicycle————— step 2");
+      // print("—————hemicycle————— step 2");
       List<ElementAttributes> _localAttributes = [];
       int index = 0;
       for (var j = 0; j < paletteGroupColors.length; j++) {
@@ -630,14 +630,14 @@ class AssemblyPainter extends CustomPainter {
           index += 1;
         }
       }
-      print("—————hemicycle————— step 3");
+      // print("—————hemicycle————— step 3");
       drawArc(canvas, size,
           elementAttributeRow: 0,
           allElementAttributes: _localAttributes,
           rectSize: rectSize,
           centerOffset: verticalOffset,
           nbElements: _localAttributes.length,
-          angleArcDegres: assemblyAngle,
+          angleArcDegres: assemblyAngle * 1.01,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows + 1) * gapRows,
           rectRadius: 10);
