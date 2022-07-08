@@ -20,6 +20,7 @@ class DrawHemicycle extends StatefulWidget {
   final bool? withTitle;
   final String? title;
   final int? nbRows;
+  final bool? useGroupSector;
 
   /// ### Creates a widget with Assembly view defined by these parameters :
   ///
@@ -38,6 +39,8 @@ class DrawHemicycle extends StatefulWidget {
   /// • [withTitle] is a boolean that display or not the Title. It needs [title] String to be provided to display.
   ///
   /// • [nbRows] is the number of rows in the Assembly representation. By default, if not provided, it is 12.
+  ///
+  /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
   DrawHemicycle(this.assemblyElements,
       {this.assemblyAngle,
       this.assemblyWidth,
@@ -48,7 +51,8 @@ class DrawHemicycle extends StatefulWidget {
       this.minLegendRows,
       this.withTitle,
       this.title,
-      this.nbRows})
+      this.nbRows,
+      this.useGroupSector})
       : super();
 
   @override
@@ -78,6 +82,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   bool withTitle;
   late String? title;
   late int? nbRows;
+  final bool? useGroupSector;
 
   _DrawHemicycleState(
       {required this.assemblyElements,
@@ -90,7 +95,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       this.minLegendRows,
       required this.withTitle,
       this.title,
-      this.nbRows})
+      this.nbRows,
+      this.useGroupSector})
       : super();
 
   @override
@@ -147,75 +153,12 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                       math.sin(
                                           assemblyAngle / 360 * 2 * math.pi))) /
                               2)) *
-                      0.15,
+                      (title!.length < 50 ? 0.15 : 0.3),
                   alignment: Alignment.bottomCenter,
                   child: Text(
                     title!,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.w900),
-                  )),
-            if (withLegend && groupSectors != null)
-              Container(
-                  width: MediaQuery.of(context).size.width * assemblyWidth,
-                  height: (MediaQuery.of(context).size.width *
-                          (math.max(
-                                  1.0,
-                                  (1 -
-                                      math.sin(
-                                          assemblyAngle / 360 * 2 * math.pi))) /
-                              2)) *
-                      ((legendRows * 0.2) + (withTitle ? 0.2 : 0)),
-                  child: Column(
-                    children: [
-                      if (withTitle && title != null)
-                        Padding(
-                            padding: EdgeInsets.all(
-                                (MediaQuery.of(context).size.width *
-                                        (math.max(
-                                                1.0,
-                                                (1 -
-                                                    math.sin(assemblyAngle /
-                                                        360 *
-                                                        2 *
-                                                        math.pi))) /
-                                            2)) *
-                                    0.1)),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            for (var i = 0; i < legendCols; i++)
-                              Padding(
-                                padding: EdgeInsets.all(6),
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      for (var j = 0; j < legendRows; j++)
-                                        if ((i * legendRows + j) < legendItems)
-                                          Row(
-                                            children: [
-                                              Container(
-                                                  width: 10,
-                                                  height: 10,
-                                                  color: groupSectors![
-                                                          i * legendRows + j]
-                                                      .sectorColor),
-                                              Padding(
-                                                  padding: EdgeInsets.all(2)),
-                                              Text(groupSectors![
-                                                          i * legendRows + j]
-                                                      .description ??
-                                                  groupSectors![
-                                                          i * legendRows + j]
-                                                      .sectorColorString),
-                                            ],
-                                          ),
-                                    ]),
-                              ),
-                          ]),
-                    ],
                   )),
             if (withLegend && individualVotes != null)
               Container(
@@ -227,7 +170,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                       math.sin(
                                           assemblyAngle / 360 * 2 * math.pi))) /
                               2)) *
-                      ((legendRows * 0.2) + (withTitle ? 0.2 : 0)),
+                      ((legendRows * 0.2) +
+                          (withTitle ? (title!.length < 50 ? 0.2 : 0.35) : 0)),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -381,6 +325,70 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                           ]),
                     ],
                   )),
+            if (withLegend && groupSectors != null && individualVotes == null)
+              Container(
+                  width: MediaQuery.of(context).size.width * assemblyWidth,
+                  height: (MediaQuery.of(context).size.width *
+                          (math.max(
+                                  1.0,
+                                  (1 -
+                                      math.sin(
+                                          assemblyAngle / 360 * 2 * math.pi))) /
+                              2)) *
+                      ((legendRows * 0.2) +
+                          (withTitle ? (title!.length < 50 ? 0.2 : 0.35) : 0)),
+                  child: Column(
+                    children: [
+                      if (withTitle && title != null)
+                        Padding(
+                            padding: EdgeInsets.all(
+                                (MediaQuery.of(context).size.width *
+                                        (math.max(
+                                                1.0,
+                                                (1 -
+                                                    math.sin(assemblyAngle /
+                                                        360 *
+                                                        2 *
+                                                        math.pi))) /
+                                            2)) *
+                                    0.1)),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var i = 0; i < legendCols; i++)
+                              Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      for (var j = 0; j < legendRows; j++)
+                                        if ((i * legendRows + j) < legendItems)
+                                          Row(
+                                            children: [
+                                              Container(
+                                                  width: 10,
+                                                  height: 10,
+                                                  color: groupSectors![
+                                                          i * legendRows + j]
+                                                      .sectorColor),
+                                              Padding(
+                                                  padding: EdgeInsets.all(2)),
+                                              Text(groupSectors![
+                                                          i * legendRows + j]
+                                                      .description ??
+                                                  groupSectors![
+                                                          i * legendRows + j]
+                                                      .sectorColorString),
+                                            ],
+                                          ),
+                                    ]),
+                              ),
+                          ]),
+                    ],
+                  )),
             Container(
               width: MediaQuery.of(context).size.width * assemblyWidth,
               height: (MediaQuery.of(context).size.width *
@@ -394,7 +402,10 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                   (((legendRows *
                               (groupSectors != null ? 0.1 : 0.1) /
                               assemblyWidth) +
-                          (withTitle ? (0.15 / assemblyWidth) : 0)) +
+                          (withTitle
+                              ? ((title!.length < 50 ? 0.15 : 0.3) /
+                                  assemblyWidth)
+                              : 0)) +
                       1.15),
               color: backgroundColor ?? null,
               child: Padding(
@@ -408,7 +419,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                           MediaQuery.of(context).size.width * assemblyWidth,
                       individualVotes: individualVotes,
                       groupSectors: groupSectors,
-                      nbRows: nbRows ?? 12),
+                      nbRows: nbRows ?? 12,
+                      useGroupSector: useGroupSector ?? false),
                 ),
               ),
             ),
@@ -420,12 +432,12 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
 class AssemblyPainter extends CustomPainter {
   final double assemblyAngle;
   final int assemblyElements;
-
   double assemblyWidth;
   double viewWidth;
   final List<IndividualVotes>? individualVotes;
   final List<GroupSectors>? groupSectors;
   final int nbRows;
+  final bool? useGroupSector;
 
   AssemblyPainter(
       {required this.assemblyAngle,
@@ -434,7 +446,8 @@ class AssemblyPainter extends CustomPainter {
       required this.viewWidth,
       this.individualVotes,
       this.groupSectors,
-      required this.nbRows})
+      required this.nbRows,
+      this.useGroupSector})
       : super();
 
   @override
@@ -443,6 +456,8 @@ class AssemblyPainter extends CustomPainter {
         List.generate(assemblyElements, (index) => hemicyleNoVote);
     List<Color> paletteParentColors =
         List.generate(assemblyElements, (index) => hemicyleNoVote);
+    List<Color> paletteGroupColors = [];
+    List<int> sectorGroupSize = [];
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
@@ -480,6 +495,12 @@ class AssemblyPainter extends CustomPainter {
           }
         }
       }
+      if (groupSectors != null && (useGroupSector ?? false)) {
+        for (GroupSectors element in groupSectors!) {
+          paletteGroupColors.add(element.sectorColor);
+          sectorGroupSize.add(element.nbElements);
+        }
+      }
     } else if (groupSectors != null) {
       int offset = 0;
       for (GroupSectors element in groupSectors!) {
@@ -491,8 +512,10 @@ class AssemblyPainter extends CustomPainter {
     }
 
     double rectSize = 5 * assemblyWidth;
-    double radiusCenter = size.width / nbRows;
-    double gapRows = size.width / 2 / nbRows;
+    double radiusCenter =
+        size.width / (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
+    double gapRows =
+        size.width / 2 / (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
     double angleOffset = 0;
 
     Offset verticalOffset = Offset(
@@ -589,6 +612,29 @@ class AssemblyPainter extends CustomPainter {
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + i * gapRows,
+          rectRadius: 10);
+    }
+    if ((useGroupSector ?? false) &&
+        individualVotes != null &&
+        groupSectors != null) {
+      List<ElementAttributes> _localAttributes = [];
+      int index = 0;
+      for (var j = 0; j < paletteGroupColors.length; j++) {
+        for (var k = 0; k < sectorGroupSize[j]; k++) {
+          _localAttributes
+              .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
+          index += 1;
+        }
+      }
+      drawArc(canvas, size,
+          elementAttributeRow: 0,
+          allElementAttributes: _localAttributes,
+          rectSize: rectSize,
+          centerOffset: verticalOffset,
+          nbElements: _localAttributes.length,
+          angleArcDegres: assemblyAngle,
+          angleOffset: angleOffset,
+          rayonArc: radiusCenter + (nbRows + 1) * gapRows,
           rectRadius: 10);
     }
   }

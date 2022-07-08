@@ -1,3 +1,7 @@
+## 0.1.0
+
+* added Group surrounding on Individual Votes view
+
 ## 0.0.33
 
 * changed Colors name from custom*** to hemicycle***
