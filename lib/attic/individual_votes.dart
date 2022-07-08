@@ -9,12 +9,12 @@ class IndividualVotes {
   /// [voteColor] is the dot color corresponding to [voteResult] boolean :
   Color get voteColor {
     if (voteResult == null) {
-      return customVoteAbstention;
+      return hemicyleVoteAbstention;
     } else {
       if (voteResult == true) {
-        return customVoteFor;
+        return hemicyleVoteFor;
       } else {
-        return customVoteAgainst;
+        return hemicyleVoteAgainst;
       }
     }
   }
@@ -61,12 +61,12 @@ class GroupPairing {
   /// [groupChoiceColor] is the dot color corresponding to [groupChoice] boolean :
   Color get groupChoiceColor {
     if (groupChoice == null) {
-      return customVoteAbstention;
+      return hemicyleVoteAbstention;
     } else {
       if (groupChoice == true) {
-        return customVoteFor;
+        return hemicyleVoteFor;
       } else {
-        return customVoteAgainst;
+        return hemicyleVoteAgainst;
       }
     }
   }

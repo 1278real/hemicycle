@@ -26,16 +26,16 @@ Map<int, Color> color = {
 };
 
 /// RED color for standard warning
-MaterialColor customRouge = MaterialColor(0xFF990000, color);
+MaterialColor hemicyleRouge = MaterialColor(0xFF990000, color);
 
 /// GREEN color for vote FOR
-MaterialColor customVoteFor = MaterialColor(0xFF099509, color);
+MaterialColor hemicyleVoteFor = MaterialColor(0xFF099509, color);
 
 /// RED color for vote AGAINST
-MaterialColor customVoteAgainst = MaterialColor(0xFFA00D0B, color);
+MaterialColor hemicyleVoteAgainst = MaterialColor(0xFFA00D0B, color);
 
 /// MIDDLE GREY color for vote ABSTENTION
-MaterialColor customVoteAbstention = MaterialColor(0xFF616161, color);
+MaterialColor hemicyleVoteAbstention = MaterialColor(0xFF616161, color);
 
 /// LIGHT GREY color for NO vote
-MaterialColor customNoVote = MaterialColor(0xFFD2D2D2, color);
+MaterialColor hemicyleNoVote = MaterialColor(0xFFD2D2D2, color);

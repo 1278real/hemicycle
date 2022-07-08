@@ -258,7 +258,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                     Text(
                                       "POUR",
                                       style: TextStyle(
-                                          color: customVoteFor,
+                                          color: hemicyleVoteFor,
                                           fontWeight: FontWeight.w900),
                                     ),
                                     Row(
@@ -266,7 +266,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         Container(
                                             width: 10,
                                             height: 10,
-                                            color: customVoteFor),
+                                            color: hemicyleVoteFor),
                                         Padding(padding: EdgeInsets.all(2)),
                                         Text(
                                           "≠ groupe",
@@ -280,8 +280,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         Container(
                                             width: 10,
                                             height: 10,
-                                            color:
-                                                customVoteFor.withOpacity(0.3)),
+                                            color: hemicyleVoteFor
+                                                .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
                                         Text(
                                           "= groupe",
@@ -301,7 +301,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                     Text(
                                       "CONTRE",
                                       style: TextStyle(
-                                          color: customVoteAgainst,
+                                          color: hemicyleVoteAgainst,
                                           fontWeight: FontWeight.w900),
                                     ),
                                     Row(
@@ -309,7 +309,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         Container(
                                             width: 10,
                                             height: 10,
-                                            color: customVoteAgainst),
+                                            color: hemicyleVoteAgainst),
                                         Padding(padding: EdgeInsets.all(2)),
                                         Text(
                                           "≠ groupe",
@@ -323,7 +323,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         Container(
                                             width: 10,
                                             height: 10,
-                                            color: customVoteAgainst
+                                            color: hemicyleVoteAgainst
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
                                         Text(
@@ -344,7 +344,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                     Text(
                                       "ABST°",
                                       style: TextStyle(
-                                          color: customVoteAbstention,
+                                          color: hemicyleVoteAbstention,
                                           fontWeight: FontWeight.w900),
                                     ),
                                     Row(
@@ -352,7 +352,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         Container(
                                             width: 10,
                                             height: 10,
-                                            color: customVoteAbstention),
+                                            color: hemicyleVoteAbstention),
                                         Padding(padding: EdgeInsets.all(2)),
                                         Text(
                                           "≠ groupe",
@@ -366,7 +366,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         Container(
                                             width: 10,
                                             height: 10,
-                                            color: customVoteAbstention
+                                            color: hemicyleVoteAbstention
                                                 .withOpacity(0.3)),
                                         Padding(padding: EdgeInsets.all(2)),
                                         Text(
@@ -440,9 +440,9 @@ class AssemblyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     List<Color> paletteColors =
-        List.generate(assemblyElements, (index) => customNoVote);
+        List.generate(assemblyElements, (index) => hemicyleNoVote);
     List<Color> paletteParentColors =
-        List.generate(assemblyElements, (index) => customNoVote);
+        List.generate(assemblyElements, (index) => hemicyleNoVote);
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
@@ -540,7 +540,7 @@ class AssemblyPainter extends CustomPainter {
 
       double minimum = assemblyElements.toDouble();
       for (var z = 0; z < rowFilled.length; z++) {
-        if (paletteColors[i] == customRouge) {
+        if (paletteColors[i] == hemicyleRouge) {
           // print(rowFilled[z].toString() + " @ z=" + z.toString());
         }
         if ((rowFilled[z] <= (nbElementsPerRow[z] * progress)) &&
@@ -548,7 +548,7 @@ class AssemblyPainter extends CustomPainter {
           minimum = rowFilled[z] / nbElementsPerRow[z];
           localRow = z;
         } else {
-          if (paletteColors[i] == customRouge) {
+          if (paletteColors[i] == hemicyleRouge) {
             /*
             print("-----" +
                 (nbElementsPerRow[z] * progress).toString() +
@@ -565,7 +565,7 @@ class AssemblyPainter extends CustomPainter {
         theElementsAttributes.add(ElementAttributes(
             i, localRow, localPosition, paletteColors[i],
             parentColor: paletteParentColors[i]));
-        if (paletteColors[i] == customRouge) {
+        if (paletteColors[i] == hemicyleRouge) {
           // print(localRow.toString() + "/" + localPosition.toString());
           // print(rowFilled.toString());
         }
