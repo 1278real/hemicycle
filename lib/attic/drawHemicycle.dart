@@ -67,7 +67,8 @@ class DrawHemicycle extends StatefulWidget {
       minLegendRows: minLegendRows,
       withTitle: withTitle ?? false,
       title: title,
-      nbRows: nbRows);
+      nbRows: nbRows,
+      useGroupSector: useGroupSector ?? false);
 }
 
 class _DrawHemicycleState extends State<DrawHemicycle> {
