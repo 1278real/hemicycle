@@ -495,6 +495,7 @@ class AssemblyPainter extends CustomPainter {
           }
         }
       }
+      print("—————hemicycle————— step 0");
       if (groupSectors != null && (useGroupSector ?? false)) {
         print("—————hemicycle————— step 1");
         for (GroupSectors element in groupSectors!) {
