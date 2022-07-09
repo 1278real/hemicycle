@@ -634,20 +634,20 @@ class AssemblyPainter extends CustomPainter {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
           if (j.isOdd) {
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.65)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.5)));
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.25)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.15)));
           } else {
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.65)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.5)));
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.25)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.15)));
           }
           index += 1;
         }
       }
       // print("—————hemicycle————— step 3");
-      double ruleSize = 2;
+      double ruleSize = 4;
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localOddAttributes,
