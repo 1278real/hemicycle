@@ -647,7 +647,7 @@ class AssemblyPainter extends CustomPainter {
         }
       }
       // print("—————hemicycle————— step 3");
-      double ruleSize = 4;
+      double ruleSize = 3;
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localOddAttributes,
@@ -666,7 +666,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: _localEvenAttributes.length,
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows - ruleSize,
+          rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 0.75),
           rectRadius: ruleSize);
     }
   }
