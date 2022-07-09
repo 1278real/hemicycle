@@ -631,7 +631,7 @@ class AssemblyPainter extends CustomPainter {
       // print("—————hemicycle————— step 3");
       double ruleSize = 3;
       double ruleRoundingSize = ruleSize;
-      double ruleExtender = 1.03;
+      double ruleExtender = 1.015;
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localInnerAttributes,
