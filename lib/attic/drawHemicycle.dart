@@ -630,24 +630,27 @@ class AssemblyPainter extends CustomPainter {
       List<ElementAttributes> _localOddAttributes = [];
       List<ElementAttributes> _localEvenAttributes = [];
       int index = 0;
+      double dark = 0.6;
+      double light = 0.05;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
           if (j.isEven) {
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.6)));
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.03)));
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
           } else {
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.6)));
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.03)));
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
           }
           index += 1;
         }
       }
       // print("—————hemicycle————— step 3");
-      double ruleSize = 4;
+      double ruleSize = 3;
+      double ruleRoundingSize = 0;
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localOddAttributes,
@@ -657,7 +660,7 @@ class AssemblyPainter extends CustomPainter {
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows,
-          rectRadius: 0);
+          rectRadius: ruleRoundingSize);
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localEvenAttributes,
@@ -667,7 +670,7 @@ class AssemblyPainter extends CustomPainter {
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 0.75),
-          rectRadius: 0);
+          rectRadius: ruleRoundingSize);
     }
   }
 
