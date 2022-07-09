@@ -452,7 +452,7 @@ class AssemblyPainter extends CustomPainter {
       : super();
 
   @override
-  void paint(Canvas canvas, Size size) {
+  void paint(Canvas canvas, Size canvasSize) {
     List<Color> paletteColors =
         List.generate(assemblyElements, (index) => hemicyleNoVote);
     List<Color> paletteParentColors =
@@ -521,14 +521,15 @@ class AssemblyPainter extends CustomPainter {
 
     double rectSize = 5 * assemblyWidth;
     double radiusCenter =
-        size.width / (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
-    double gapRows =
-        size.width / 2 / (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
+        canvasSize.width / (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
+    double gapRows = canvasSize.width /
+        2 /
+        (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
     double angleOffset = 0;
 
     Offset verticalOffset = Offset(
         0,
-        size.height *
+        canvasSize.height *
             ((math.min(1.0, (1 + math.sin(assemblyAngle / 360 * 2 * math.pi))) /
                 2)));
 
@@ -611,7 +612,7 @@ class AssemblyPainter extends CustomPainter {
     }
 */
     for (var i = 0; i < nbRows; i++) {
-      drawArc(canvas, size,
+      drawArc(canvas, canvasSize,
           elementAttributeRow: i,
           allElementAttributes: theElementsAttributes,
           rectSize: rectSize,
@@ -636,16 +637,16 @@ class AssemblyPainter extends CustomPainter {
         }
       }
       // print("—————hemicycle————— step 3");
-      drawArc(canvas, size,
+      drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localAttributes,
-          rectSize: rectSize / 2,
+          rectSize: rectSize / 3,
           centerOffset: verticalOffset,
           nbElements: _localAttributes.length,
           angleArcDegres: assemblyAngle * 1.01,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows,
-          rectRadius: 5);
+          rectRadius: 0);
     }
   }
 
