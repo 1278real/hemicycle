@@ -631,7 +631,7 @@ class AssemblyPainter extends CustomPainter {
       List<ElementAttributes> _localMiddleAttributes = [];
       List<ElementAttributes> _localOuterAttributes = [];
       int index = 0;
-      double dark = 0.35;
+      double dark = 0.25;
       double light = 0.05;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
