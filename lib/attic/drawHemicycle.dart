@@ -631,32 +631,17 @@ class AssemblyPainter extends CustomPainter {
       List<ElementAttributes> _localMiddleAttributes = [];
       List<ElementAttributes> _localOuterAttributes = [];
       int index = 0;
-      double dark = 0.6;
+      double dark = 0.5;
       double light = 0.05;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
-          if (j % 3 == 1) {
-            _localInnerAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
-            _localMiddleAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-            _localOuterAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
-          } else if (j % 3 == 2) {
-            _localInnerAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
-            _localMiddleAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
-            _localOuterAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-          } else {
-            _localInnerAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-            _localMiddleAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
-            _localOuterAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
-          }
+          _localInnerAttributes
+              .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
+          _localMiddleAttributes.add(ElementAttributes(
+              index, 0, index, paletteGroupColors[j].withOpacity(dark)));
+          _localOuterAttributes.add(ElementAttributes(
+              index, 0, index, paletteGroupColors[j].withOpacity(light)));
+
           index += 1;
         }
       }
