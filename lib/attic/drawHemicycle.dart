@@ -636,12 +636,12 @@ class AssemblyPainter extends CustomPainter {
             _localOddAttributes
                 .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, Color.fromRGBO(255, 255, 255, 0)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.2)));
           } else {
             _localEvenAttributes
                 .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, Color.fromRGBO(255, 255, 255, 0)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.2)));
           }
           index += 1;
         }
@@ -665,7 +665,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: _localEvenAttributes.length,
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows - 2,
+          rayonArc: radiusCenter + (nbRows) * gapRows - 1,
           rectRadius: 0);
     }
   }
