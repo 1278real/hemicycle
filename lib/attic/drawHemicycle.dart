@@ -640,7 +640,7 @@ class AssemblyPainter extends CustomPainter {
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localAttributes,
-          rectSize: rectSize / 3,
+          rectSize: 1,
           centerOffset: verticalOffset,
           nbElements: _localAttributes.length,
           angleArcDegres: assemblyAngle * 1.01,
