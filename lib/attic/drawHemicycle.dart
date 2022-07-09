@@ -507,6 +507,7 @@ class AssemblyPainter extends CustomPainter {
               "-" +
               element.sectorColor.toString());
         }
+        print("—————hemicycle————— ");
       }
     } else if (groupSectors != null) {
       int offset = 0;
