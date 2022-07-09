@@ -634,13 +634,13 @@ class AssemblyPainter extends CustomPainter {
       drawArc(canvas, size,
           elementAttributeRow: 0,
           allElementAttributes: _localAttributes,
-          rectSize: rectSize,
+          rectSize: rectSize / 2,
           centerOffset: verticalOffset,
           nbElements: _localAttributes.length,
           angleArcDegres: assemblyAngle * 1.01,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows + 1) * gapRows,
-          rectRadius: 10);
+          rayonArc: radiusCenter + (nbRows) * gapRows,
+          rectRadius: 5);
     }
   }
 

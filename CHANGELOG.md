@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Graphics enhancements
+
 ## 0.1.0
 
 * added Group surrounding on Individual Votes view
