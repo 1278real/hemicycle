@@ -572,35 +572,18 @@ class AssemblyPainter extends CustomPainter {
 
       double minimum = assemblyElements.toDouble();
       for (var z = 0; z < rowFilled.length; z++) {
-        if (paletteColors[i] == hemicyleRouge) {
-          // print(rowFilled[z].toString() + " @ z=" + z.toString());
-        }
         if ((rowFilled[z] <= (nbElementsPerRow[z] * progress)) &&
             (rowFilled[z] / nbElementsPerRow[z] <= minimum)) {
           minimum = rowFilled[z] / nbElementsPerRow[z];
           localRow = z;
-        } else {
-          if (paletteColors[i] == hemicyleRouge) {
-            /*
-            print("-----" +
-                (nbElementsPerRow[z] * progress).toString() +
-                " @ progress");
-            print("-----" + (minimum).toString() + " @ minimum");
-            */
-          }
         }
       }
-
       if (localRow != null) {
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
         theElementsAttributes.add(ElementAttributes(
             i, localRow, localPosition, paletteColors[i],
             parentColor: paletteParentColors[i]));
-        if (paletteColors[i] == hemicyleRouge) {
-          // print(localRow.toString() + "/" + localPosition.toString());
-          // print(rowFilled.toString());
-        }
       }
     }
 
