@@ -627,23 +627,35 @@ class AssemblyPainter extends CustomPainter {
         individualVotes != null &&
         groupSectors != null) {
       // print("—————hemicycle————— step 2");
-      List<ElementAttributes> _localOddAttributes = [];
-      List<ElementAttributes> _localEvenAttributes = [];
+      List<ElementAttributes> _localInnerAttributes = [];
+      List<ElementAttributes> _localMiddleAttributes = [];
+      List<ElementAttributes> _localOuterAttributes = [];
       int index = 0;
       double dark = 0.6;
       double light = 0.05;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
-          if (j.isEven) {
-            _localOddAttributes.add(ElementAttributes(
+          if (j % 3 == 1) {
+            _localInnerAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-            _localEvenAttributes.add(ElementAttributes(
+            _localMiddleAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
+            _localOuterAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
+          } else if (j % 3 == 2) {
+            _localInnerAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
+            _localMiddleAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
+            _localOuterAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
           } else {
-            _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-            _localOddAttributes.add(ElementAttributes(
+            _localInnerAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
+            _localMiddleAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
+            _localOuterAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
           }
           index += 1;
         }
@@ -653,20 +665,30 @@ class AssemblyPainter extends CustomPainter {
       double ruleRoundingSize = 0;
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
-          allElementAttributes: _localOddAttributes,
+          allElementAttributes: _localInnerAttributes,
           rectSize: ruleSize,
           centerOffset: verticalOffset,
-          nbElements: _localOddAttributes.length,
+          nbElements: _localInnerAttributes.length,
+          angleArcDegres: assemblyAngle,
+          angleOffset: angleOffset,
+          rayonArc: radiusCenter + (nbRows) * gapRows + (ruleSize * 0.75),
+          rectRadius: ruleRoundingSize);
+      drawArc(canvas, canvasSize,
+          elementAttributeRow: 0,
+          allElementAttributes: _localMiddleAttributes,
+          rectSize: ruleSize,
+          centerOffset: verticalOffset,
+          nbElements: _localMiddleAttributes.length,
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows,
           rectRadius: ruleRoundingSize);
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
-          allElementAttributes: _localEvenAttributes,
+          allElementAttributes: _localOuterAttributes,
           rectSize: ruleSize,
           centerOffset: verticalOffset,
-          nbElements: _localEvenAttributes.length,
+          nbElements: _localOuterAttributes.length,
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 0.75),
