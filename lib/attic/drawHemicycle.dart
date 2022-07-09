@@ -632,7 +632,7 @@ class AssemblyPainter extends CustomPainter {
       int index = 0;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
-          if (j.isOdd) {
+          if (j.isEven) {
             _localOddAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(0.6)));
             _localEvenAttributes.add(ElementAttributes(
