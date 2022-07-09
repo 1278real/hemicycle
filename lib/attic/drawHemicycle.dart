@@ -618,8 +618,8 @@ class AssemblyPainter extends CustomPainter {
       double light = 0.05;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
-          _localInnerAttributes
-              .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
+          _localInnerAttributes.add(ElementAttributes(
+              index, 0, index, paletteGroupColors[j].withOpacity(light)));
           _localMiddleAttributes.add(ElementAttributes(
               index, 0, index, paletteGroupColors[j].withOpacity(dark)));
           _localOuterAttributes.add(ElementAttributes(
