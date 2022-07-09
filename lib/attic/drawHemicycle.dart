@@ -502,6 +502,10 @@ class AssemblyPainter extends CustomPainter {
         for (GroupSectors element in groupSectors!) {
           paletteGroupColors.add(element.sectorColor);
           sectorGroupSize.add(element.nbElements);
+          print("—————hemicycle————— " +
+              element.nbElements.toString() +
+              "-" +
+              element.sectorColor.toString());
         }
       }
     } else if (groupSectors != null) {
