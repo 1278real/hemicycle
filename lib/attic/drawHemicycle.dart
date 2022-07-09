@@ -637,7 +637,7 @@ class AssemblyPainter extends CustomPainter {
           rectSize: ruleSize,
           centerOffset: verticalOffset,
           nbElements: _localInnerAttributes.length,
-          angleArcDegres: assemblyAngle,
+          angleArcDegres: assemblyAngle * 1.1,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows + ruleSize,
           rectRadius: ruleRoundingSize);
@@ -647,7 +647,7 @@ class AssemblyPainter extends CustomPainter {
           rectSize: ruleSize,
           centerOffset: verticalOffset,
           nbElements: _localMiddleAttributes.length,
-          angleArcDegres: assemblyAngle,
+          angleArcDegres: assemblyAngle * 1.1,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows,
           rectRadius: ruleRoundingSize);
@@ -657,7 +657,7 @@ class AssemblyPainter extends CustomPainter {
           rectSize: ruleSize,
           centerOffset: verticalOffset,
           nbElements: _localOuterAttributes.length,
-          angleArcDegres: assemblyAngle,
+          angleArcDegres: assemblyAngle * 1.1,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows - ruleSize,
           rectRadius: ruleRoundingSize);
