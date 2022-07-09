@@ -631,7 +631,7 @@ class AssemblyPainter extends CustomPainter {
       List<ElementAttributes> _localMiddleAttributes = [];
       List<ElementAttributes> _localOuterAttributes = [];
       int index = 0;
-      double dark = 0.5;
+      double dark = 0.35;
       double light = 0.05;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
@@ -656,7 +656,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: _localInnerAttributes.length,
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows + (ruleSize * 0.75),
+          rayonArc: radiusCenter + (nbRows) * gapRows + (ruleSize * 0.85),
           rectRadius: ruleRoundingSize);
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
@@ -676,7 +676,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: _localOuterAttributes.length,
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 0.75),
+          rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 0.85),
           rectRadius: ruleRoundingSize);
     }
   }
