@@ -637,32 +637,32 @@ class AssemblyPainter extends CustomPainter {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
           if (j % 3 == 1) {
             _localInnerAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-            _localMiddleAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
+            _localMiddleAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
             _localOuterAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
           } else if (j % 3 == 2) {
             _localInnerAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
             _localMiddleAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-            _localOuterAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
+            _localOuterAttributes.add(ElementAttributes(
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
           } else {
             _localInnerAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(light)));
+                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
             _localMiddleAttributes.add(ElementAttributes(
                 index, 0, index, paletteGroupColors[j].withOpacity(light)));
             _localOuterAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(dark)));
+                index, 0, index, paletteGroupColors[j].withOpacity(light)));
           }
           index += 1;
         }
       }
       // print("—————hemicycle————— step 3");
       double ruleSize = 3;
-      double ruleRoundingSize = 0;
+      double ruleRoundingSize = ruleSize;
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localInnerAttributes,
