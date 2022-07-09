@@ -627,25 +627,45 @@ class AssemblyPainter extends CustomPainter {
         individualVotes != null &&
         groupSectors != null) {
       // print("—————hemicycle————— step 2");
-      List<ElementAttributes> _localAttributes = [];
+      List<ElementAttributes> _localOddAttributes = [];
+      List<ElementAttributes> _localEvenAttributes = [];
       int index = 0;
       for (var j = 0; j < paletteGroupColors.length; j++) {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
-          _localAttributes
-              .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
+          if (j.isOdd) {
+            _localOddAttributes
+                .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
+            _localEvenAttributes.add(ElementAttributes(
+                index, 0, index, Color.fromRGBO(255, 255, 255, 0)));
+          } else {
+            _localEvenAttributes
+                .add(ElementAttributes(index, 0, index, paletteGroupColors[j]));
+            _localOddAttributes.add(ElementAttributes(
+                index, 0, index, Color.fromRGBO(255, 255, 255, 0)));
+          }
           index += 1;
         }
       }
       // print("—————hemicycle————— step 3");
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
-          allElementAttributes: _localAttributes,
+          allElementAttributes: _localOddAttributes,
           rectSize: 1,
           centerOffset: verticalOffset,
-          nbElements: _localAttributes.length,
-          angleArcDegres: assemblyAngle * 1.01,
+          nbElements: _localOddAttributes.length,
+          angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + (nbRows) * gapRows,
+          rectRadius: 0);
+      drawArc(canvas, canvasSize,
+          elementAttributeRow: 0,
+          allElementAttributes: _localEvenAttributes,
+          rectSize: 1,
+          centerOffset: verticalOffset,
+          nbElements: _localEvenAttributes.length,
+          angleArcDegres: assemblyAngle,
+          angleOffset: angleOffset,
+          rayonArc: radiusCenter + (nbRows) * gapRows - 2,
           rectRadius: 0);
     }
   }
