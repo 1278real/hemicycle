@@ -640,7 +640,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: _localInnerAttributes.length,
           angleArcDegres: assemblyAngle * ruleExtender,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows + ruleSize,
+          rayonArc: radiusCenter + (nbRows) * gapRows + (ruleSize * 1.5),
           rectRadius: ruleRoundingSize);
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
@@ -660,7 +660,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: _localOuterAttributes.length,
           angleArcDegres: assemblyAngle * ruleExtender,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows - ruleSize,
+          rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 1.5),
           rectRadius: ruleRoundingSize);
     }
   }
