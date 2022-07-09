@@ -634,14 +634,14 @@ class AssemblyPainter extends CustomPainter {
         for (var k = 0; k < sectorGroupSize[j]; k++) {
           if (j.isOdd) {
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.5)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.6)));
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.15)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.1)));
           } else {
             _localEvenAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.5)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.6)));
             _localOddAttributes.add(ElementAttributes(
-                index, 0, index, paletteGroupColors[j].withOpacity(0.15)));
+                index, 0, index, paletteGroupColors[j].withOpacity(0.1)));
           }
           index += 1;
         }
@@ -661,7 +661,7 @@ class AssemblyPainter extends CustomPainter {
       drawArc(canvas, canvasSize,
           elementAttributeRow: 0,
           allElementAttributes: _localEvenAttributes,
-          rectSize: 2,
+          rectSize: ruleSize,
           centerOffset: verticalOffset,
           nbElements: _localEvenAttributes.length,
           angleArcDegres: assemblyAngle,
