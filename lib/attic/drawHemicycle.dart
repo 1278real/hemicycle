@@ -622,7 +622,14 @@ class AssemblyPainter extends CustomPainter {
           nbElements: nbElementsPerRow[i],
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter + i * gapRows,
+          rayonArc: radiusCenter +
+              (i +
+                      (((useGroupSector ?? false) &&
+                              individualVotes != null &&
+                              sectorBackgroundElements != [])
+                          ? 1
+                          : 0)) *
+                  gapRows,
           rectRadius: 10);
     }
   }
