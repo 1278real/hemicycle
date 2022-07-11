@@ -702,6 +702,7 @@ class AssemblyPainter extends CustomPainter {
     for (SectorAttributes sector in allSectorAttributes) {
       allSectorsSize += sector.size;
     }
+    print("allSectorsSize = " + allSectorsSize.toString());
     double arcOffset = 0;
     for (SectorAttributes sector in allSectorAttributes) {
       paint.color = sector.elementColor;
