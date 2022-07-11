@@ -513,11 +513,10 @@ class AssemblyPainter extends CustomPainter {
             (paletteGroupColors.length > 0 ? 1 : 0));
     double angleOffset = 0;
 
-    Offset verticalOffset = Offset(
-        0,
-        canvasSize.height *
-            ((math.min(1.0, (1 + math.sin(assemblyAngle.degreesToRadians))) /
-                2)));
+    double verticalOffsetBase = canvasSize.height *
+        ((math.min(1.0, (1 + math.sin(assemblyAngle.degreesToRadians))) / 2));
+    Offset verticalOffsetForDots = Offset(0, verticalOffsetBase);
+    Offset verticalOffsetForSectors = Offset(0, verticalOffsetBase + rectSize);
 
     double totalLength = 0;
     for (var i = 0; i < nbRows; i++) {
@@ -622,12 +621,12 @@ class AssemblyPainter extends CustomPainter {
       print("drawBackgroundArcOfSectors OK");
       drawBackgroundArcOfSectors(canvas, canvasSize,
           allSectorAttributes: sectorBackgroundElements,
-          centerOffset: verticalOffset,
+          centerOffset: verticalOffsetForSectors,
           assemblyAngle: assemblyAngle,
           angleArcDegrees: assemblyAngle,
           angleOffset: angleOffset,
-          insideHole: ((radiusCenter / 2) + nbRows * gapRows) * 2,
-          rayonArc: (radiusCenter + nbRows * gapRows) * 2,
+          insideHole: ((radiusCenter / 2) + nbRows * gapRows) * 2.2,
+          rayonArc: (radiusCenter + nbRows * gapRows) * 2.2,
           backgroundOpacity: 0.15,
           widgetColorBackground: Colors.white);
     } else {
@@ -639,7 +638,7 @@ class AssemblyPainter extends CustomPainter {
           elementAttributeRow: i,
           allElementAttributes: theElementsAttributes,
           rectSize: rectSize,
-          centerOffset: verticalOffset,
+          centerOffset: verticalOffsetForDots,
           nbElements: nbElementsPerRow[i],
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
