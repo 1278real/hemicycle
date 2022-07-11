@@ -591,22 +591,23 @@ class AssemblyPainter extends CustomPainter {
                     .add(SectorAttributes(i, 0, theGroupColors[i]));
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
-                print("new group");
+                // print("new group");
               } else {
                 sectorBackgroundElements.last =
                     SectorAttributes(i, _colorIndex, theGroupColors[i]);
                 _colorIndex += 1;
-                print("...");
+                // print("...");
               }
             }
           } else {
-            print("theGroupColors.length ≠ assemblyElements");
+            // print("theGroupColors.length ≠ assemblyElements");
           }
         } else {
-          print("groupSectors == null");
+          // print("groupSectors == null");
         }
 
-        // print("&&&&& sectorBackgroundElements &&&&& " + sectorBackgroundElements.toString());
+        print("&&&&& sectorBackgroundElements &&&&& " +
+            sectorBackgroundElements.toString());
 
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
@@ -671,7 +672,7 @@ class AssemblyPainter extends CustomPainter {
 
     var center = Offset(canvasSize.width / 2, canvasSize.height / 2);
 
-    print(allSectorAttributes.toString());
+    print("&&&&& allSectorAttributes &&&&& " + allSectorAttributes.toString());
 
     int allSectorsSize = 0;
 
