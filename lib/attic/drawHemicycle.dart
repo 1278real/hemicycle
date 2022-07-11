@@ -42,6 +42,10 @@ class DrawHemicycle extends StatefulWidget {
   /// • [nbRows] is the number of rows in the Assembly representation. By default, if not provided, it is 12.
   ///
   /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
+  ///
+  /// • [backgroundColor] is used with [useGroupSector] to match your Background color if not Scaffold background color
+  ///
+  /// • [backgroundOpacity] is used with [useGroupSector] to change the Opacity of the Sectors behind the IndividualVotes Dots
   DrawHemicycle(this.assemblyElements,
       {this.assemblyAngle,
       this.assemblyWidth,
@@ -406,7 +410,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   assemblyWidth)
                               : 0)) +
                       1.15),
-              color: backgroundColor ?? null,
+              color:
+                  backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: CustomPaint(
