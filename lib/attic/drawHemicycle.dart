@@ -548,13 +548,13 @@ class AssemblyPainter extends CustomPainter {
 
     List<Color> theGroupColors = [];
     if (groupSectors != null) {
-      if (groupSectors!.length == assemblyElements) {
-        for (GroupSectors group in groupSectors!) {
-          for (var i = 0; i < group.nbElements; i++) {
-            theGroupColors.add(group.sectorColor);
-          }
+      for (GroupSectors group in groupSectors!) {
+        for (var i = 0; i < group.nbElements; i++) {
+          theGroupColors.add(group.sectorColor);
         }
       }
+    } else {
+      print("groupSectors == null");
     }
 
     print("&&&&& theGroupColors &&&&& " + theGroupColors.toString());
