@@ -153,6 +153,41 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Stack(children: [
+            Container(
+              width: MediaQuery.of(context).size.width * assemblyWidth,
+              height: (MediaQuery.of(context).size.width *
+                      assemblyWidth *
+                      (math.max(1.0,
+                              (1 - math.sin(assemblyAngle.degreesToRadians))) /
+                          2)) *
+                  (((legendRows *
+                              (groupSectors != null ? 0.1 : 0.1) /
+                              assemblyWidth) +
+                          (withTitle
+                              ? ((title!.length < 50 ? 0.15 : 0.3) /
+                                  assemblyWidth)
+                              : 0)) +
+                      1.15),
+              color:
+                  backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: CustomPaint(
+                    painter: AssemblyPainter(
+                        assemblyAngle: assemblyAngle,
+                        assemblyElements: assemblyElements,
+                        assemblyWidth: assemblyWidth,
+                        viewWidth:
+                            MediaQuery.of(context).size.width * assemblyWidth,
+                        individualVotes: individualVotes,
+                        groupSectors: groupSectors,
+                        nbRows: nbRows ?? 12,
+                        useGroupSector: useGroupSector ?? false,
+                        backgroundOpacity: backgroundOpacity,
+                        backgroundColor: backgroundColor ??
+                            Theme.of(context).scaffoldBackgroundColor)),
+              ),
+            ),
             if (withTitle && title != null)
               Container(
                   width: MediaQuery.of(context).size.width * assemblyWidth,
@@ -395,41 +430,6 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                           ]),
                     ],
                   )),
-            Container(
-              width: MediaQuery.of(context).size.width * assemblyWidth,
-              height: (MediaQuery.of(context).size.width *
-                      assemblyWidth *
-                      (math.max(1.0,
-                              (1 - math.sin(assemblyAngle.degreesToRadians))) /
-                          2)) *
-                  (((legendRows *
-                              (groupSectors != null ? 0.1 : 0.1) /
-                              assemblyWidth) +
-                          (withTitle
-                              ? ((title!.length < 50 ? 0.15 : 0.3) /
-                                  assemblyWidth)
-                              : 0)) +
-                      1.15),
-              color:
-                  backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: CustomPaint(
-                    painter: AssemblyPainter(
-                        assemblyAngle: assemblyAngle,
-                        assemblyElements: assemblyElements,
-                        assemblyWidth: assemblyWidth,
-                        viewWidth:
-                            MediaQuery.of(context).size.width * assemblyWidth,
-                        individualVotes: individualVotes,
-                        groupSectors: groupSectors,
-                        nbRows: nbRows ?? 12,
-                        useGroupSector: useGroupSector ?? false,
-                        backgroundOpacity: backgroundOpacity,
-                        backgroundColor: backgroundColor ??
-                            Theme.of(context).scaffoldBackgroundColor)),
-              ),
-            ),
           ]),
         ));
   }
