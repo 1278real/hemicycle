@@ -595,7 +595,10 @@ class AssemblyPainter extends CustomPainter {
       }
     }
 
-    if ((useGroupSector ?? false) && individualVotes != null) {
+    if ((useGroupSector ?? false) &&
+        individualVotes != null &&
+        sectorBackgroundElements != []) {
+      print("drawBackgroundArcOfSectors OK");
       drawBackgroundArcOfSectors(canvas, canvasSize,
           allSectorAttributes: sectorBackgroundElements,
           centerOffset: verticalOffset,
@@ -606,6 +609,8 @@ class AssemblyPainter extends CustomPainter {
           rayonArc: radiusCenter + nbRows * gapRows,
           backgroundOpacity: 0.15,
           widgetColorBackground: Colors.white);
+    } else {
+      print("drawBackgroundArcOfSectors NOPE");
     }
 
     for (var i = 0; i < nbRows; i++) {
