@@ -578,9 +578,6 @@ class AssemblyPainter extends CustomPainter {
 
     // print("&&&&& theGroupColors &&&&& " + theGroupColors.toString());
 
-    Color? _tempColor = null;
-    int _colorIndex = 0;
-
     for (var i = 0; i < assemblyElements; i++) {
       int? localRow;
       int? localPosition;
@@ -599,32 +596,9 @@ class AssemblyPainter extends CustomPainter {
         if (groupSectors != null) {
           if (theGroupColors.length == assemblyElements) {
             if (localRow == nbRows - 1) {
-              // pour se caler sur l'alternance de l'arc externe
-
-              if (_tempColor == null) {
-                _tempColor = theGroupColors[i];
-              }
-
-              _colorIndex += 1;
-
-              if ((i + 1) == assemblyElements) {
-                sectorBackgroundElements
-                    .add(SectorAttributes(i, _colorIndex, theGroupColors[i]));
-                print("new last group");
-              }
-
-              if (_tempColor != theGroupColors[i] &&
-                  (i + 1) == assemblyElements) {
-                sectorBackgroundElements
-                    .add(SectorAttributes(i, _colorIndex, _tempColor));
-                _tempColor = theGroupColors[i];
-                _colorIndex = 0;
-
-                print("new group");
-              }
+              sectorBackgroundElements
+                  .add(SectorAttributes(i, 1, theGroupColors[i]));
             }
-          } else {
-            // print("theGroupColors.length ≠ assemblyElements");
           }
         } else {
           // print("groupSectors == null");
