@@ -587,12 +587,19 @@ class AssemblyPainter extends CustomPainter {
                     .add(SectorAttributes(i, _colorIndex, _tempColor));
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
+                print("new group");
               } else {
                 _colorIndex += 1;
+                print("...");
               }
             }
+          } else {
+            print("theGroupColors.length ≠ assemblyElements");
           }
+        } else {
+          print("groupSectors == null");
         }
+
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
         theElementsAttributes.add(ElementAttributes(
