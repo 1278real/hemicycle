@@ -516,7 +516,8 @@ class AssemblyPainter extends CustomPainter {
     double verticalOffsetBase = canvasSize.height *
         ((math.min(1.0, (1 + math.sin(assemblyAngle.degreesToRadians))) / 2));
     Offset verticalOffsetForDots = Offset(0, verticalOffsetBase);
-    Offset verticalOffsetForSectors = Offset(0, verticalOffsetBase + rectSize);
+    Offset verticalOffsetForSectors =
+        Offset(0, verticalOffsetBase + (rectSize / 2));
 
     double totalLength = 0;
     for (var i = 0; i < nbRows; i++) {
