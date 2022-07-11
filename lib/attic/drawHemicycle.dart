@@ -604,6 +604,8 @@ class AssemblyPainter extends CustomPainter {
           print("groupSectors == null");
         }
 
+        print(sectorBackgroundElements.toString());
+
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
         theElementsAttributes.add(ElementAttributes(
