@@ -557,6 +557,8 @@ class AssemblyPainter extends CustomPainter {
       }
     }
 
+    print(theGroupColors.toString());
+
     Color? _tempColor = null;
     int _colorIndex = 0;
 
