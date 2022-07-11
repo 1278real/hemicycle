@@ -591,7 +591,7 @@ class AssemblyPainter extends CustomPainter {
                     .add(SectorAttributes(i, 0, theGroupColors[i]));
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
-                // print("new group");
+                print("new group");
               } else {
                 sectorBackgroundElements.last =
                     SectorAttributes(i, _colorIndex, theGroupColors[i]);
@@ -606,9 +606,6 @@ class AssemblyPainter extends CustomPainter {
           // print("groupSectors == null");
         }
 
-        print("&&&&& sectorBackgroundElements &&&&& " +
-            sectorBackgroundElements.toString());
-
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
         theElementsAttributes.add(ElementAttributes(
@@ -616,6 +613,9 @@ class AssemblyPainter extends CustomPainter {
             parentColor: paletteParentColors[i]));
       }
     }
+
+    print("&&&&& sectorBackgroundElements &&&&& " +
+        sectorBackgroundElements.toString());
 
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
