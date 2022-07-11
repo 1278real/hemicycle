@@ -603,7 +603,7 @@ class AssemblyPainter extends CustomPainter {
               if (_tempColor == null) {
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
-              } else if (i == theGroupColors.length - 1) {
+              } else if (i == theGroupColors.length) {
                 sectorBackgroundElements
                     .add(SectorAttributes(i, _colorIndex, _tempColor));
                 // print("new last group");
