@@ -656,6 +656,8 @@ class AssemblyPainter extends CustomPainter {
 
     var center = Offset(canvasSize.width / 2, canvasSize.height / 2);
 
+    print(allSectorAttributes.toString());
+
     int allSectorsSize = 0;
 
     for (SectorAttributes sector in allSectorAttributes) {
