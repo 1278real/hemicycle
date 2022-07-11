@@ -610,7 +610,7 @@ class AssemblyPainter extends CustomPainter {
               if (i + 1 == assemblyElements) {
                 sectorBackgroundElements
                     .add(SectorAttributes(i, _colorIndex, theGroupColors[i]));
-                // print("new last group");
+                print("new last group");
               }
 
               if (_tempColor != theGroupColors[i]) {
@@ -618,7 +618,7 @@ class AssemblyPainter extends CustomPainter {
                     .add(SectorAttributes(i, _colorIndex, _tempColor));
                 _tempColor = theGroupColors[i];
 
-                // print("new group");
+                print("new group");
               } else {
                 // print("...");
               }
