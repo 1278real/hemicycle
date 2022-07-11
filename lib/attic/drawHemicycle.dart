@@ -626,8 +626,8 @@ class AssemblyPainter extends CustomPainter {
           assemblyAngle: assemblyAngle,
           angleArcDegrees: assemblyAngle,
           angleOffset: angleOffset,
-          insideHole: (radiusCenter / 2) + nbRows * gapRows,
-          rayonArc: radiusCenter + nbRows * gapRows,
+          insideHole: ((radiusCenter / 2) + nbRows * gapRows) * 2,
+          rayonArc: (radiusCenter + nbRows * gapRows) * 2,
           backgroundOpacity: 0.15,
           widgetColorBackground: Colors.white);
     } else {
