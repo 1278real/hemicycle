@@ -603,16 +603,21 @@ class AssemblyPainter extends CustomPainter {
               if (_tempColor == null) {
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
-              } else if (i + 1 == assemblyElements) {
-                sectorBackgroundElements
-                    .add(SectorAttributes(i, _colorIndex, _tempColor));
-                // print("new last group");
               } else if (_tempColor != theGroupColors[i]) {
                 sectorBackgroundElements
                     .add(SectorAttributes(i, _colorIndex, _tempColor));
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
+                if (i + 1 == assemblyElements) {
+                  sectorBackgroundElements
+                      .add(SectorAttributes(i, _colorIndex, _tempColor));
+                  // print("new last group");
+                }
                 // print("new group");
+              } else if (i + 1 == assemblyElements) {
+                sectorBackgroundElements
+                    .add(SectorAttributes(i, _colorIndex, _tempColor));
+                // print("new last group");
               } else {
                 _colorIndex += 1;
                 // print("...");
