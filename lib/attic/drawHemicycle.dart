@@ -593,8 +593,9 @@ class AssemblyPainter extends CustomPainter {
                 _colorIndex = 1;
                 print("new group");
               } else {
-                sectorBackgroundElements.last =
-                    SectorAttributes(i, _colorIndex, theGroupColors[i]);
+                sectorBackgroundElements.removeLast();
+                sectorBackgroundElements
+                    .add(SectorAttributes(i, _colorIndex, theGroupColors[i]));
                 _colorIndex += 1;
                 // print("...");
               }
