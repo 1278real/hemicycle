@@ -633,14 +633,14 @@ class AssemblyPainter extends CustomPainter {
       }
     }
 
-    print("&&&&& sectorBackgroundElements &&&&& ");
+    // print("&&&&& sectorBackgroundElements &&&&& ");
 
     double expanderSector = 2;
 
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
         sectorBackgroundElements != []) {
-      print("drawBackgroundArcOfSectors OK");
+      // print("drawBackgroundArcOfSectors OK");
       drawBackgroundArcOfSectors(canvas, canvasSize,
           allSectorAttributes: sectorBackgroundElements,
           centerOffset: verticalOffsetForSectors,
@@ -652,14 +652,8 @@ class AssemblyPainter extends CustomPainter {
           rayonArc: (radiusCenter + nbRows * gapRowsSector) * expanderSector,
           backgroundOpacity: backgroundOpacity,
           widgetColorBackground: backgroundColor);
-    } else if (!(useGroupSector ?? true)) {
-      print("drawBackgroundArcOfSectors NOPE useGroupSector");
-    } else if (individualVotes == null) {
-      print("drawBackgroundArcOfSectors NOPE individualVotes == null");
-    } else if (sectorBackgroundElements == []) {
-      print("drawBackgroundArcOfSectors NOPE sectorBackgroundElements == []");
     } else {
-      print("drawBackgroundArcOfSectors NOPE wtf");
+      // print("drawBackgroundArcOfSectors NOPE");
     }
 
     //
@@ -701,8 +695,7 @@ class AssemblyPainter extends CustomPainter {
 
     var center = Offset(canvasSize.width / 2, canvasSize.height / 2);
 
-    print("&&&&& allSectorAttributes &&&&& " +
-        allSectorAttributes.length.toString());
+    // print("&&&&& allSectorAttributes &&&&& " + allSectorAttributes.length.toString());
 
     int allSectorsSize = 0;
 
