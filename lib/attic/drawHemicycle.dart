@@ -605,11 +605,11 @@ class AssemblyPainter extends CustomPainter {
                 _tempColor = theGroupColors[i];
               }
 
-              _colorIndex = 1;
+              _colorIndex += 1;
 
               if (i + 1 == assemblyElements) {
                 sectorBackgroundElements
-                    .add(SectorAttributes(i, _colorIndex, _tempColor));
+                    .add(SectorAttributes(i, _colorIndex, theGroupColors[i]));
                 // print("new last group");
               }
 
