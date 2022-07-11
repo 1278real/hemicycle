@@ -582,20 +582,19 @@ class AssemblyPainter extends CustomPainter {
             if (localRow == nbRows - 1) {
               // pour se caler sur l'alternance externe
               if (_tempColor == null) {
-                sectorBackgroundElements
-                    .add(SectorAttributes(i, _colorIndex, theGroupColors[i]));
                 _tempColor = theGroupColors[i];
-                _colorIndex += 1;
+                _colorIndex = 1;
+              } else if (i == theGroupColors.length - 1) {
+                sectorBackgroundElements
+                    .add(SectorAttributes(i, _colorIndex, _tempColor));
+                print("new last group");
               } else if (_tempColor != theGroupColors[i]) {
                 sectorBackgroundElements
-                    .add(SectorAttributes(i, 0, theGroupColors[i]));
+                    .add(SectorAttributes(i, _colorIndex, _tempColor));
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
                 print("new group");
               } else {
-                sectorBackgroundElements.removeLast();
-                sectorBackgroundElements
-                    .add(SectorAttributes(i, _colorIndex, theGroupColors[i]));
                 _colorIndex += 1;
                 // print("...");
               }
