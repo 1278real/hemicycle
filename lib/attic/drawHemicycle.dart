@@ -425,7 +425,9 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                         groupSectors: groupSectors,
                         nbRows: nbRows ?? 12,
                         useGroupSector: useGroupSector ?? false,
-                        backgroundOpacity: backgroundOpacity)),
+                        backgroundOpacity: backgroundOpacity,
+                        backgroundColor: backgroundColor ??
+                            Theme.of(context).scaffoldBackgroundColor)),
               ),
             ),
           ]),
@@ -442,6 +444,7 @@ class AssemblyPainter extends CustomPainter {
   final List<GroupSectors>? groupSectors;
   final int nbRows;
   final bool? useGroupSector;
+  final Color backgroundColor;
   final double backgroundOpacity;
 
   AssemblyPainter(
@@ -453,7 +456,8 @@ class AssemblyPainter extends CustomPainter {
       this.groupSectors,
       required this.nbRows,
       this.useGroupSector,
-      required this.backgroundOpacity})
+      required this.backgroundOpacity,
+      required this.backgroundColor})
       : super();
 
   @override
@@ -643,7 +647,7 @@ class AssemblyPainter extends CustomPainter {
           insideHole: ((radiusCenter / 2) + nbRows * gapRows) * expanderSector,
           rayonArc: (radiusCenter + nbRows * gapRows) * expanderSector,
           backgroundOpacity: backgroundOpacity,
-          widgetColorBackground: Colors.white);
+          widgetColorBackground: backgroundColor);
     } else {
       print("drawBackgroundArcOfSectors NOPE");
     }
