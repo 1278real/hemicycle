@@ -662,6 +662,8 @@ class AssemblyPainter extends CustomPainter {
       print("drawBackgroundArcOfSectors NOPE wtf");
     }
 
+    //
+
     for (var i = 0; i < nbRows; i++) {
       drawArcOfPoints(canvas, canvasSize,
           elementAttributeRow: i,
