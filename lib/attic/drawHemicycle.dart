@@ -504,7 +504,13 @@ class AssemblyPainter extends CustomPainter {
         canvasSize.width / (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
     double gapRows = canvasSize.width /
         2 /
-        (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
+        (nbRows +
+            (((useGroupSector ?? false) &&
+                    individualVotes != null &&
+                    groupSectors != null)
+                ? 1
+                : 0) +
+            (paletteGroupColors.length > 0 ? 1 : 0));
     double angleOffset = 0;
 
     Offset verticalOffset = Offset(
@@ -622,14 +628,7 @@ class AssemblyPainter extends CustomPainter {
           nbElements: nbElementsPerRow[i],
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
-          rayonArc: radiusCenter +
-              (i +
-                      (((useGroupSector ?? false) &&
-                              individualVotes != null &&
-                              sectorBackgroundElements != [])
-                          ? 1
-                          : 0)) *
-                  gapRows,
+          rayonArc: radiusCenter + i * gapRows,
           rectRadius: 10);
     }
   }
