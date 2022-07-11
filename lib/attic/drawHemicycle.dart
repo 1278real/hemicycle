@@ -587,13 +587,13 @@ class AssemblyPainter extends CustomPainter {
               } else if (i == theGroupColors.length - 1) {
                 sectorBackgroundElements
                     .add(SectorAttributes(i, _colorIndex, _tempColor));
-                print("new last group");
+                // print("new last group");
               } else if (_tempColor != theGroupColors[i]) {
                 sectorBackgroundElements
                     .add(SectorAttributes(i, _colorIndex, _tempColor));
                 _tempColor = theGroupColors[i];
                 _colorIndex = 1;
-                print("new group");
+                // print("new group");
               } else {
                 _colorIndex += 1;
                 // print("...");
@@ -614,8 +614,7 @@ class AssemblyPainter extends CustomPainter {
       }
     }
 
-    print("&&&&& sectorBackgroundElements &&&&& " +
-        sectorBackgroundElements.toString());
+    print("&&&&& sectorBackgroundElements &&&&& ");
 
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
