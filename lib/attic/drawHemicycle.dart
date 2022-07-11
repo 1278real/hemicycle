@@ -43,9 +43,9 @@ class DrawHemicycle extends StatefulWidget {
   ///
   /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
   ///
-  /// • [backgroundColor] is used with [useGroupSector] to match your Background color if not Scaffold background color
-  ///
   /// • [backgroundOpacity] is used with [useGroupSector] to change the Opacity of the Sectors behind the IndividualVotes Dots
+  ///
+  /// • [backgroundColor] is used to fill the Drawing area with a plain background color
   DrawHemicycle(this.assemblyElements,
       {this.assemblyAngle,
       this.assemblyWidth,
@@ -524,9 +524,12 @@ class AssemblyPainter extends CustomPainter {
             (((useGroupSector ?? false) &&
                     individualVotes != null &&
                     groupSectors != null)
-                ? 1
+                ? 1.5
                 : 0) +
             (paletteGroupColors.length > 0 ? 1 : 0));
+    double gapRowsSector = canvasSize.width /
+        2 /
+        (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
     double angleOffset = 0;
 
     double verticalOffsetBase = canvasSize.height *
@@ -632,7 +635,7 @@ class AssemblyPainter extends CustomPainter {
 
     print("&&&&& sectorBackgroundElements &&&&& ");
 
-    double expanderSector = 2.1;
+    double expanderSector = 2;
 
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
@@ -644,8 +647,9 @@ class AssemblyPainter extends CustomPainter {
           assemblyAngle: assemblyAngle,
           angleArcDegrees: assemblyAngle,
           angleOffset: angleOffset,
-          insideHole: ((radiusCenter / 2) + nbRows * gapRows) * expanderSector,
-          rayonArc: (radiusCenter + nbRows * gapRows) * expanderSector,
+          insideHole:
+              ((radiusCenter / 2) + nbRows * gapRowsSector) * expanderSector,
+          rayonArc: (radiusCenter + nbRows * gapRowsSector) * expanderSector,
           backgroundOpacity: backgroundOpacity,
           widgetColorBackground: backgroundColor);
     } else {
