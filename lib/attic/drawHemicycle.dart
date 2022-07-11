@@ -554,10 +554,10 @@ class AssemblyPainter extends CustomPainter {
         }
       }
     } else {
-      print("groupSectors == null");
+      // print("groupSectors == null");
     }
 
-    print("&&&&& theGroupColors &&&&& " + theGroupColors.toString());
+    // print("&&&&& theGroupColors &&&&& " + theGroupColors.toString());
 
     Color? _tempColor = null;
     int _colorIndex = 0;
@@ -606,7 +606,7 @@ class AssemblyPainter extends CustomPainter {
           print("groupSectors == null");
         }
 
-        print(sectorBackgroundElements.toString());
+        // print("&&&&& sectorBackgroundElements &&&&& " + sectorBackgroundElements.toString());
 
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
