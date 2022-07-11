@@ -21,6 +21,7 @@ class DrawHemicycle extends StatefulWidget {
   final String? title;
   final int? nbRows;
   final bool? useGroupSector;
+  final double? backgroundOpacity;
 
   /// ### Creates a widget with Assembly view defined by these parameters :
   ///
@@ -52,7 +53,8 @@ class DrawHemicycle extends StatefulWidget {
       this.withTitle,
       this.title,
       this.nbRows,
-      this.useGroupSector})
+      this.useGroupSector,
+      this.backgroundOpacity})
       : super();
 
   @override
@@ -68,7 +70,8 @@ class DrawHemicycle extends StatefulWidget {
       withTitle: withTitle ?? false,
       title: title,
       nbRows: nbRows,
-      useGroupSector: useGroupSector ?? false);
+      useGroupSector: useGroupSector ?? false,
+      backgroundOpacity: backgroundOpacity ?? 0.05);
 }
 
 class _DrawHemicycleState extends State<DrawHemicycle> {
@@ -84,6 +87,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   late String? title;
   late int? nbRows;
   final bool? useGroupSector;
+  final double backgroundOpacity;
 
   _DrawHemicycleState(
       {required this.assemblyElements,
@@ -97,7 +101,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       required this.withTitle,
       this.title,
       this.nbRows,
-      this.useGroupSector})
+      this.useGroupSector,
+      required this.backgroundOpacity})
       : super();
 
   @override
@@ -405,17 +410,17 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: CustomPaint(
-                  painter: AssemblyPainter(
-                      assemblyAngle: assemblyAngle,
-                      assemblyElements: assemblyElements,
-                      assemblyWidth: assemblyWidth,
-                      viewWidth:
-                          MediaQuery.of(context).size.width * assemblyWidth,
-                      individualVotes: individualVotes,
-                      groupSectors: groupSectors,
-                      nbRows: nbRows ?? 12,
-                      useGroupSector: useGroupSector ?? false),
-                ),
+                    painter: AssemblyPainter(
+                        assemblyAngle: assemblyAngle,
+                        assemblyElements: assemblyElements,
+                        assemblyWidth: assemblyWidth,
+                        viewWidth:
+                            MediaQuery.of(context).size.width * assemblyWidth,
+                        individualVotes: individualVotes,
+                        groupSectors: groupSectors,
+                        nbRows: nbRows ?? 12,
+                        useGroupSector: useGroupSector ?? false,
+                        backgroundOpacity: backgroundOpacity)),
               ),
             ),
           ]),
@@ -432,6 +437,7 @@ class AssemblyPainter extends CustomPainter {
   final List<GroupSectors>? groupSectors;
   final int nbRows;
   final bool? useGroupSector;
+  final double backgroundOpacity;
 
   AssemblyPainter(
       {required this.assemblyAngle,
@@ -441,7 +447,8 @@ class AssemblyPainter extends CustomPainter {
       this.individualVotes,
       this.groupSectors,
       required this.nbRows,
-      this.useGroupSector})
+      this.useGroupSector,
+      required this.backgroundOpacity})
       : super();
 
   @override
@@ -616,6 +623,8 @@ class AssemblyPainter extends CustomPainter {
 
     print("&&&&& sectorBackgroundElements &&&&& ");
 
+    double expanderSector = 2.1;
+
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
         sectorBackgroundElements != []) {
@@ -626,9 +635,9 @@ class AssemblyPainter extends CustomPainter {
           assemblyAngle: assemblyAngle,
           angleArcDegrees: assemblyAngle,
           angleOffset: angleOffset,
-          insideHole: ((radiusCenter / 2) + nbRows * gapRows) * 2.2,
-          rayonArc: (radiusCenter + nbRows * gapRows) * 2.2,
-          backgroundOpacity: 0.08,
+          insideHole: ((radiusCenter / 2) + nbRows * gapRows) * expanderSector,
+          rayonArc: (radiusCenter + nbRows * gapRows) * expanderSector,
+          backgroundOpacity: backgroundOpacity,
           widgetColorBackground: Colors.white);
     } else {
       print("drawBackgroundArcOfSectors NOPE");
