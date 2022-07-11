@@ -68,13 +68,13 @@ class DrawHemicycle extends StatefulWidget {
       assemblyWidth: assemblyWidth ?? 1,
       individualVotes: individualVotes,
       groupSectors: groupSectors,
-      backgroundColor: backgroundColor,
       withLegend: withLegend ?? false,
       minLegendRows: minLegendRows,
       withTitle: withTitle ?? false,
       title: title,
       nbRows: nbRows,
       useGroupSector: useGroupSector ?? false,
+      backgroundColor: backgroundColor,
       backgroundOpacity: backgroundOpacity ?? 0.05);
 }
 
