@@ -652,8 +652,14 @@ class AssemblyPainter extends CustomPainter {
           rayonArc: (radiusCenter + nbRows * gapRowsSector) * expanderSector,
           backgroundOpacity: backgroundOpacity,
           widgetColorBackground: backgroundColor);
+    } else if (!(useGroupSector ?? true)) {
+      print("drawBackgroundArcOfSectors NOPE useGroupSector");
+    } else if (individualVotes == null) {
+      print("drawBackgroundArcOfSectors NOPE individualVotes == null");
+    } else if (sectorBackgroundElements == []) {
+      print("drawBackgroundArcOfSectors NOPE sectorBackgroundElements == []");
     } else {
-      print("drawBackgroundArcOfSectors NOPE");
+      print("drawBackgroundArcOfSectors NOPE wtf");
     }
 
     for (var i = 0; i < nbRows; i++) {
