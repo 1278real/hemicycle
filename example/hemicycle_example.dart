@@ -30,13 +30,13 @@ class _HemicycleExampleState extends State<HemicycleExample> {
     numberTest = 1;
     resteTest = 577 - numberTest - 1;
 
-    List<GroupSectors> hemicycleTest = [
+    hemicycleTest = [
       GroupSectors(numberTest, hemicyleVoteFor, description: "BEFORE"),
       GroupSectors(1, hemicyleVoteAgainst, description: "NEW"),
       GroupSectors(resteTest, hemicyleVoteAbstention, description: "AFTER")
     ];
 
-    List<IndividualVotes> votesTest = [
+    votesTest = [
       IndividualVotes(33, voteResult: true, groupPairing: "AAA"),
       IndividualVotes(34, voteResult: true, groupPairing: "AAA"),
       IndividualVotes(35, voteResult: false, groupPairing: "AAA"),

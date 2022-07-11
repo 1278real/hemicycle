@@ -679,10 +679,10 @@ class AssemblyPainter extends CustomPainter {
     int allSectorsSize = 0;
 
     for (SectorAttributes sector in allSectorAttributes) {
-      print("* sectorSize = " + sector.size.toString());
+      // print("* sectorSize = " + sector.size.toString());
       allSectorsSize += sector.size;
     }
-    print("allSectorsSize = " + allSectorsSize.toString());
+    // print("allSectorsSize = " + allSectorsSize.toString());
 
     double arcOffset = 0;
     for (SectorAttributes sector in allSectorAttributes) {

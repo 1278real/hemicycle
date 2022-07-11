@@ -1,4 +1,4 @@
-## 0.2.1
+## 0.2.2
 
 * Rebuild of the surrounding arc in Individual Votes mode
 
