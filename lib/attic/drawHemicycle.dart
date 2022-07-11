@@ -14,7 +14,7 @@ class DrawHemicycle extends StatefulWidget {
   final double? assemblyWidth;
   final List<IndividualVotes>? individualVotes;
   final List<GroupSectors>? groupSectors;
-  final MaterialColor? backgroundColor;
+  final Color? backgroundColor;
   final bool? withLegend;
   final int? minLegendRows;
   final bool? withTitle;
@@ -84,7 +84,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   double assemblyWidth;
   late List<IndividualVotes>? individualVotes;
   late List<GroupSectors>? groupSectors;
-  late MaterialColor? backgroundColor;
+  late Color? backgroundColor;
   bool withLegend;
   late int? minLegendRows;
   bool withTitle;
