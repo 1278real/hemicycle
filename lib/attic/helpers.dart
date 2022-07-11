@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:math' as math;
 
 extension CapExtension on String {
   /// ### CAPS for first character
@@ -36,15 +36,21 @@ extension CapExtension on String {
   }
 }
 
+extension RadiansDegreesConvert on double {
+  double get radiansToDegrees => this * 360 / 2 / math.pi;
+
+  double get degreesToRadians => this / 360 * 2 * math.pi;
+}
+
 /// Round a double input [aArrondir] to [nbDecimales] decimals (if not provided, 2 decimals)
 double roundToNDecimals(double aArrondir, {int nbDecimales = 2}) {
-  var tempValue = (aArrondir * pow(10, nbDecimales.toDouble())).round();
-  return tempValue / pow(10, nbDecimales.toDouble());
+  var tempValue = (aArrondir * math.pow(10, nbDecimales.toDouble())).round();
+  return tempValue / math.pow(10, nbDecimales.toDouble());
 }
 
 /// Provide a plus or a minus sign, and round a double input [aArrondir] to [nbDecimales] decimals (if not provided, 2 decimals)
 String signedRoundToNDecimals(double aArrondir, {int nbDecimales = 2}) {
-  var tempValue = (aArrondir * pow(10, nbDecimales.toDouble())).round();
-  double toSign = tempValue / pow(10, nbDecimales.toDouble());
+  var tempValue = (aArrondir * math.pow(10, nbDecimales.toDouble())).round();
+  double toSign = tempValue / math.pow(10, nbDecimales.toDouble());
   return (toSign > 0 ? "+" + toSign.toString() : toSign.toString());
 }

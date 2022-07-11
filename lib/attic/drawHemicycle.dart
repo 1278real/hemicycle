@@ -152,7 +152,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   1.0,
                                   (1 -
                                       math.sin(
-                                          assemblyAngle / 360 * 2 * math.pi))) /
+                                          assemblyAngle.degreesToRadians))) /
                               2)) *
                       (title!.length < 50 ? 0.15 : 0.3),
                   alignment: Alignment.bottomCenter,
@@ -169,7 +169,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   1.0,
                                   (1 -
                                       math.sin(
-                                          assemblyAngle / 360 * 2 * math.pi))) /
+                                          assemblyAngle.degreesToRadians))) /
                               2)) *
                       ((legendRows * 0.2) +
                           (withTitle ? (title!.length < 50 ? 0.2 : 0.35) : 0)),
@@ -184,10 +184,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         (math.max(
                                                 1.0,
                                                 (1 -
-                                                    math.sin(assemblyAngle /
-                                                        360 *
-                                                        2 *
-                                                        math.pi))) /
+                                                    math.sin(assemblyAngle
+                                                        .degreesToRadians))) /
                                             2)) *
                                     0.1)),
                       Row(
@@ -334,7 +332,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                   1.0,
                                   (1 -
                                       math.sin(
-                                          assemblyAngle / 360 * 2 * math.pi))) /
+                                          assemblyAngle.degreesToRadians))) /
                               2)) *
                       ((legendRows * 0.2) +
                           (withTitle ? (title!.length < 50 ? 0.2 : 0.35) : 0)),
@@ -347,10 +345,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                         (math.max(
                                                 1.0,
                                                 (1 -
-                                                    math.sin(assemblyAngle /
-                                                        360 *
-                                                        2 *
-                                                        math.pi))) /
+                                                    math.sin(assemblyAngle
+                                                        .degreesToRadians))) /
                                             2)) *
                                     0.1)),
                       Row(
@@ -394,11 +390,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
               width: MediaQuery.of(context).size.width * assemblyWidth,
               height: (MediaQuery.of(context).size.width *
                       assemblyWidth *
-                      (math.max(
-                              1.0,
-                              (1 -
-                                  math.sin(
-                                      assemblyAngle / 360 * 2 * math.pi))) /
+                      (math.max(1.0,
+                              (1 - math.sin(assemblyAngle.degreesToRadians))) /
                           2)) *
                   (((legendRows *
                               (groupSectors != null ? 0.1 : 0.1) /
@@ -496,19 +489,6 @@ class AssemblyPainter extends CustomPainter {
           }
         }
       }
-      // print("—————hemicycle————— step 0");
-      if (groupSectors != null && (useGroupSector ?? false)) {
-        // print("—————hemicycle————— step 1");
-        for (GroupSectors element in groupSectors!) {
-          paletteGroupColors.add(element.sectorColor);
-          sectorGroupSize.add(element.nbElements);
-          print("—————hemicycle————— " +
-              element.nbElements.toString() +
-              "-" +
-              element.sectorColor.toString());
-        }
-        print("—————hemicycle————— ");
-      }
     } else if (groupSectors != null) {
       int offset = 0;
       for (GroupSectors element in groupSectors!) {
@@ -530,7 +510,7 @@ class AssemblyPainter extends CustomPainter {
     Offset verticalOffset = Offset(
         0,
         canvasSize.height *
-            ((math.min(1.0, (1 + math.sin(assemblyAngle / 360 * 2 * math.pi))) /
+            ((math.min(1.0, (1 + math.sin(assemblyAngle.degreesToRadians))) /
                 2)));
 
     double totalLength = 0;
@@ -556,13 +536,23 @@ class AssemblyPainter extends CustomPainter {
       nbElementsOrdered += elementsToDraw;
       nbElementsPerRow.add(elementsToDraw);
     }
-    // print(nbElementsOrdered.toString());
-
     List<ElementAttributes> theElementsAttributes = [];
-
-    // print("nbElementsPerRow = " + nbElementsPerRow.toString());
-
+    List<SectorAttributes> sectorBackgroundElements = [];
     List<int> rowFilled = List.filled(nbRows, 0);
+
+    List<Color> theGroupColors = [];
+    if (groupSectors != null) {
+      if (groupSectors!.length == assemblyElements) {
+        for (GroupSectors group in groupSectors!) {
+          for (var i = 0; i < group.nbElements; i++) {
+            theGroupColors.add(group.sectorColor);
+          }
+        }
+      }
+    }
+
+    Color? _tempColor = null;
+    int? _colorIndex = null;
 
     for (var i = 0; i < assemblyElements; i++) {
       int? localRow;
@@ -579,6 +569,24 @@ class AssemblyPainter extends CustomPainter {
         }
       }
       if (localRow != null) {
+        if (groupSectors != null) {
+          if (theGroupColors.length == assemblyElements) {
+            if (localRow == nbRows - 1) {
+              // pour se caler sur l'alternance externe
+              if (_tempColor == null || _colorIndex == null) {
+                _tempColor = theGroupColors[i];
+                _colorIndex = 1;
+              } else if (_tempColor != theGroupColors[i]) {
+                sectorBackgroundElements
+                    .add(SectorAttributes(i, _colorIndex, _tempColor));
+                _tempColor = theGroupColors[i];
+                _colorIndex = 1;
+              } else {
+                _colorIndex += 1;
+              }
+            }
+          }
+        }
         localPosition = rowFilled[localRow];
         rowFilled[localRow] += 1;
         theElementsAttributes.add(ElementAttributes(
@@ -587,15 +595,21 @@ class AssemblyPainter extends CustomPainter {
       }
     }
 
-    // print("0 / test = " + rowFilled.toString());
-
-/*
-    for (ElementAttributes element in theElementsAttributes) {
-      print(element.row.toString() + " / " + element.position.toString());
+    if ((useGroupSector ?? false) && individualVotes != null) {
+      drawBackgroundArcOfSectors(canvas, canvasSize,
+          allSectorAttributes: sectorBackgroundElements,
+          centerOffset: verticalOffset,
+          assemblyAngle: assemblyAngle,
+          angleArcDegrees: assemblyAngle,
+          angleOffset: angleOffset,
+          insideHole: (radiusCenter / 2) + nbRows * gapRows,
+          rayonArc: radiusCenter + nbRows * gapRows,
+          backgroundOpacity: 0.15,
+          widgetColorBackground: Colors.white);
     }
-*/
+
     for (var i = 0; i < nbRows; i++) {
-      drawArc(canvas, canvasSize,
+      drawArcOfPoints(canvas, canvasSize,
           elementAttributeRow: i,
           allElementAttributes: theElementsAttributes,
           rectSize: rectSize,
@@ -606,70 +620,109 @@ class AssemblyPainter extends CustomPainter {
           rayonArc: radiusCenter + i * gapRows,
           rectRadius: 10);
     }
-    if ((useGroupSector ?? false) &&
-        individualVotes != null &&
-        groupSectors != null) {
-      // print("—————hemicycle————— step 2");
-      List<ElementAttributes> _localInnerAttributes = [];
-      List<ElementAttributes> _localMiddleAttributes = [];
-      List<ElementAttributes> _localOuterAttributes = [];
-      int index = 0;
-      double dark = 0.25;
-      double light = 0.05;
-      for (var j = 0; j < paletteGroupColors.length; j++) {
-        for (var k = 0; k < sectorGroupSize[j]; k++) {
-          _localInnerAttributes.add(ElementAttributes(
-              index, 0, index, paletteGroupColors[j].withOpacity(light)));
-          _localMiddleAttributes.add(ElementAttributes(
-              index, 0, index, paletteGroupColors[j].withOpacity(dark)));
-          _localOuterAttributes.add(ElementAttributes(
-              index, 0, index, paletteGroupColors[j].withOpacity(light)));
-
-          index += 1;
-        }
-      }
-      // print("—————hemicycle————— step 3");
-      double ruleSize = 3;
-      double ruleRoundingSize = ruleSize;
-      double ruleExtender = 1.015;
-      drawArc(canvas, canvasSize,
-          elementAttributeRow: 0,
-          allElementAttributes: _localInnerAttributes,
-          rectSize: (ruleSize * 1.5),
-          centerOffset: verticalOffset,
-          nbElements: _localInnerAttributes.length,
-          angleArcDegres: assemblyAngle * ruleExtender,
-          angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows + (ruleSize * 1.35),
-          rectRadius: ruleRoundingSize);
-      drawArc(canvas, canvasSize,
-          elementAttributeRow: 0,
-          allElementAttributes: _localMiddleAttributes,
-          rectSize: ruleSize,
-          centerOffset: verticalOffset,
-          nbElements: _localMiddleAttributes.length,
-          angleArcDegres: assemblyAngle * ruleExtender,
-          angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows,
-          rectRadius: ruleRoundingSize);
-      drawArc(canvas, canvasSize,
-          elementAttributeRow: 0,
-          allElementAttributes: _localOuterAttributes,
-          rectSize: (ruleSize * 1.5),
-          centerOffset: verticalOffset,
-          nbElements: _localOuterAttributes.length,
-          angleArcDegres: assemblyAngle * ruleExtender,
-          angleOffset: angleOffset,
-          rayonArc: radiusCenter + (nbRows) * gapRows - (ruleSize * 1.35),
-          rectRadius: ruleRoundingSize);
-    }
   }
 
   double perimeterFromDegrees(double radiusArc, double angleDegrees) {
-    return (angleDegrees / 360 * 2 * math.pi) * radiusArc;
+    return (angleDegrees.degreesToRadians) * radiusArc;
   }
 
-  void drawArc(Canvas canvas, Size canvasSize,
+  void drawBackgroundArcOfSectors(Canvas canvas, Size canvasSize,
+      {Color color = const Color.fromRGBO(128, 128, 128, 1),
+      required List<SectorAttributes> allSectorAttributes,
+      Offset centerOffset = const Offset(0, 0),
+      double assemblyAngle = 175,
+      required double angleArcDegrees,
+      double angleOffset = 0,
+      required double insideHole,
+      required double rayonArc,
+      double backgroundOpacity = 0.1,
+      required Color widgetColorBackground}) {
+    double angleDebut = ((-angleArcDegrees / 2) + angleOffset);
+    double angleFin = (angleArcDegrees / 2) + angleOffset;
+
+    final paint = new Paint();
+    paint.color = color;
+
+    var center = Offset(canvasSize.width / 2, canvasSize.height / 2);
+
+    int allSectorsSize = 0;
+
+    for (SectorAttributes sector in allSectorAttributes) {
+      allSectorsSize += sector.size;
+    }
+    double arcOffset = 0;
+    for (SectorAttributes sector in allSectorAttributes) {
+      paint.color = sector.elementColor;
+      double sweep = sector.size / allSectorsSize * angleArcDegrees;
+      drawAnArc(canvas, paint,
+          center: center,
+          centerOffset: centerOffset,
+          rayonArc: rayonArc,
+          startAngleInDegrees:
+              angleDebut.degreesToRadians + arcOffset.degreesToRadians,
+          sweepAngleInDegrees: sweep.degreesToRadians);
+      arcOffset += sweep;
+    }
+
+    final paintBackground = new Paint();
+    paintBackground.color =
+        widgetColorBackground.withOpacity(1 - backgroundOpacity);
+
+    drawAnArc(canvas, paintBackground,
+        center: center,
+        centerOffset: centerOffset,
+        rayonArc: insideHole,
+        startAngleInDegrees: angleDebut.degreesToRadians,
+        sweepAngleInDegrees: assemblyAngle.degreesToRadians);
+  }
+
+  void drawAnArc(Canvas canvas, Paint paint,
+      {required Offset center,
+      required Offset centerOffset,
+      required double rayonArc,
+      required double startAngleInDegrees,
+      required double sweepAngleInDegrees}) {
+    return canvas.drawArc(
+        Rect.fromCenter(
+            center: Offset(
+                center.dx + centerOffset.dx, center.dy + centerOffset.dy),
+            width: rayonArc,
+            height: rayonArc),
+        startAngleInDegrees + (-90.0).degreesToRadians,
+        sweepAngleInDegrees,
+        true,
+        paint);
+  }
+
+  void drawArcOfSectors(Canvas canvas, Size canvasSize,
+      {Color color = const Color.fromRGBO(128, 128, 128, 1),
+      int? elementAttributeRow,
+      List<SectorAttributes>? allSectorAttributes,
+      Offset centerOffset = const Offset(0, 0),
+      double angleArcDegres = 90,
+      double angleOffset = 0,
+      double rayonArc = 100}) {
+    double angleDebut = (-angleArcDegres / 2) + angleOffset;
+    double angleFin = (angleArcDegres / 2) + angleOffset;
+
+    final paint = new Paint();
+    paint.color = color;
+
+    var center = Offset(canvasSize.width / 2, canvasSize.height / 2);
+
+    canvas.drawArc(
+        Rect.fromCenter(
+            center: Offset(
+                center.dx + centerOffset.dx, center.dy + centerOffset.dy),
+            width: rayonArc,
+            height: rayonArc),
+        angleDebut.degreesToRadians,
+        (80.0).degreesToRadians,
+        false,
+        paint);
+  }
+
+  void drawArcOfPoints(Canvas canvas, Size canvasSize,
       {Color color = const Color.fromRGBO(128, 128, 128, 1),
       int? elementAttributeRow,
       List<ElementAttributes>? allElementAttributes,
@@ -702,9 +755,9 @@ class AssemblyPainter extends CustomPainter {
           canvasSize,
           color,
           rectSize,
-          (centerOffset.dx + rayonArc * math.sin(angle / 360 * 2 * math.pi))
+          (centerOffset.dx + rayonArc * math.sin(angle.degreesToRadians))
               .toDouble(),
-          (centerOffset.dy + rayonArc * -math.cos(angle / 360 * 2 * math.pi))
+          (centerOffset.dy + rayonArc * -math.cos(angle.degreesToRadians))
               .toDouble(),
           radius: rectRadius);
     } else {
@@ -731,11 +784,9 @@ class AssemblyPainter extends CustomPainter {
           canvasSize,
           color,
           rectSize,
-          (centerOffset.dx +
-                  rayonArc * math.sin(angleDebut / 360 * 2 * math.pi))
+          (centerOffset.dx + rayonArc * math.sin(angleDebut.degreesToRadians))
               .toDouble(),
-          (centerOffset.dy +
-                  rayonArc * -math.cos(angleDebut / 360 * 2 * math.pi))
+          (centerOffset.dy + rayonArc * -math.cos(angleDebut.degreesToRadians))
               .toDouble(),
           radius: rectRadius);
       int maxLoop = 0;
@@ -761,9 +812,9 @@ class AssemblyPainter extends CustomPainter {
             canvasSize,
             color,
             rectSize,
-            (centerOffset.dx + rayonArc * math.sin(angle / 360 * 2 * math.pi))
+            (centerOffset.dx + rayonArc * math.sin(angle.degreesToRadians))
                 .toDouble(),
-            (centerOffset.dy + rayonArc * -math.cos(angle / 360 * 2 * math.pi))
+            (centerOffset.dy + rayonArc * -math.cos(angle.degreesToRadians))
                 .toDouble(),
             radius: rectRadius);
         maxLoop = i;
@@ -789,9 +840,9 @@ class AssemblyPainter extends CustomPainter {
           canvasSize,
           color,
           rectSize,
-          (centerOffset.dx + rayonArc * math.sin(angleFin / 360 * 2 * math.pi))
+          (centerOffset.dx + rayonArc * math.sin(angleFin.degreesToRadians))
               .toDouble(),
-          (centerOffset.dy + rayonArc * -math.cos(angleFin / 360 * 2 * math.pi))
+          (centerOffset.dy + rayonArc * -math.cos(angleFin.degreesToRadians))
               .toDouble(),
           radius: rectRadius);
     }
@@ -814,12 +865,12 @@ class AssemblyPainter extends CustomPainter {
           (centerOffset.dx +
                   distance *
                       (i - (nbElements - 1) / 2) *
-                      -math.sin(angleDegres / 360 * 2 * math.pi))
+                      -math.sin(angleDegres.degreesToRadians))
               .toDouble(),
           (centerOffset.dy +
                   distance *
                       (i - (nbElements - 1) / 2) *
-                      math.cos(angleDegres / 360 * 2 * math.pi))
+                      math.cos(angleDegres.degreesToRadians))
               .toDouble(),
           radius: rectRadius);
     }
@@ -832,6 +883,7 @@ class AssemblyPainter extends CustomPainter {
     paint.color = color;
 
     var center = Offset(canvasSize.width / 2, canvasSize.height / 2);
+
     canvas.drawRRect(
         RRect.fromLTRBR(
             center.dx.roundToDouble() - (rectSize / 2) + xOffset,

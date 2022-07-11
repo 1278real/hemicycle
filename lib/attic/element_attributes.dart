@@ -27,3 +27,25 @@ class ElementAttributes with IterableMixin<ElementAttributes> {
   @override
   Iterator<ElementAttributes> get iterator => throw UnimplementedError();
 }
+
+class SectorAttributes with IterableMixin<SectorAttributes> {
+  int index;
+  int size;
+  Color elementColor;
+  String? description;
+
+  /// ### Describes the parameters for each sector of the surrounding arc around the votes :
+  ///
+  /// • [index] is the increasing index starting at 0 for the sectors from left to right.
+  ///
+  /// • [size] is the size of the sector (i.e the number of members involved).
+  ///
+  /// • [elementColor] is the dot color displayed in full opacity by default.
+  ///
+  /// • [description] is a nullable String that is NOT YET displayed ; for future use.
+  SectorAttributes(this.index, this.size, this.elementColor,
+      {this.description});
+
+  @override
+  Iterator<SectorAttributes> get iterator => throw UnimplementedError();
+}
