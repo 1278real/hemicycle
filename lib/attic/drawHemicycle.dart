@@ -627,7 +627,7 @@ class AssemblyPainter extends CustomPainter {
           angleOffset: angleOffset,
           insideHole: ((radiusCenter / 2) + nbRows * gapRows) * 2.2,
           rayonArc: (radiusCenter + nbRows * gapRows) * 2.2,
-          backgroundOpacity: 0.15,
+          backgroundOpacity: 0.08,
           widgetColorBackground: Colors.white);
     } else {
       print("drawBackgroundArcOfSectors NOPE");
