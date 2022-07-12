@@ -786,8 +786,8 @@ class AssemblyPainter extends CustomPainter {
           if (element.row == elementAttributeRow && element.position == 0) {
             if (element.parentColor != null &&
                 element.parentColor == element.elementColor) {
-              if ((element.parentColor == hemicyleVoteAbstention ||
-                      element.parentColor == hemicyleNoVote) &&
+              if ((element.elementColor == hemicyleVoteAbstention ||
+                      element.elementColor == hemicyleNoVote) &&
                   (hilite_fronde ?? false)) {
                 color = element.elementColor;
               } else {
@@ -856,8 +856,8 @@ class AssemblyPainter extends CustomPainter {
             if (element.row == elementAttributeRow && element.position == i) {
               if (element.parentColor != null &&
                   element.parentColor == element.elementColor) {
-                if ((element.parentColor == hemicyleVoteAbstention ||
-                        element.parentColor == hemicyleNoVote) &&
+                if ((element.elementColor == hemicyleVoteAbstention ||
+                        element.elementColor == hemicyleNoVote) &&
                     (hilite_fronde ?? false)) {
                   color = element.elementColor;
                 } else {
@@ -890,8 +890,8 @@ class AssemblyPainter extends CustomPainter {
               element.position == maxLoop + 1) {
             if (element.parentColor != null &&
                 element.parentColor == element.elementColor) {
-              if ((element.parentColor == hemicyleVoteAbstention ||
-                      element.parentColor == hemicyleNoVote) &&
+              if ((element.elementColor == hemicyleVoteAbstention ||
+                      element.elementColor == hemicyleNoVote) &&
                   (hilite_fronde ?? false)) {
                 color = element.elementColor;
               } else {
