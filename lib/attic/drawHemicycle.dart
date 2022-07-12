@@ -22,6 +22,7 @@ class DrawHemicycle extends StatefulWidget {
   final int? nbRows;
   final bool? useGroupSector;
   final double? backgroundOpacity;
+  final bool? hilite_fronde;
 
   /// ### Creates a widget with Assembly view defined by these parameters :
   ///
@@ -43,6 +44,8 @@ class DrawHemicycle extends StatefulWidget {
   ///
   /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
   ///
+  /// • [hilite_fronde] is a boolean that display or not the No Vote and Abstention in Group that have a majority of Voters in Individual Votes view.
+  ///
   /// • [backgroundOpacity] is used with [useGroupSector] to change the Opacity of the Sectors behind the IndividualVotes Dots
   ///
   /// • [backgroundColor] is used to fill the Drawing area with a plain background color
@@ -58,7 +61,8 @@ class DrawHemicycle extends StatefulWidget {
       this.title,
       this.nbRows,
       this.useGroupSector,
-      this.backgroundOpacity})
+      this.backgroundOpacity,
+      this.hilite_fronde})
       : super();
 
   @override
@@ -75,7 +79,8 @@ class DrawHemicycle extends StatefulWidget {
       nbRows: nbRows,
       useGroupSector: useGroupSector ?? false,
       backgroundColor: backgroundColor,
-      backgroundOpacity: backgroundOpacity ?? 0.05);
+      backgroundOpacity: backgroundOpacity ?? 0.05,
+      hilite_fronde: hilite_fronde);
 }
 
 class _DrawHemicycleState extends State<DrawHemicycle> {
@@ -92,6 +97,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   late int? nbRows;
   final bool? useGroupSector;
   final double backgroundOpacity;
+  final bool? hilite_fronde;
 
   _DrawHemicycleState(
       {required this.assemblyElements,
@@ -106,7 +112,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       this.title,
       this.nbRows,
       this.useGroupSector,
-      required this.backgroundOpacity})
+      required this.backgroundOpacity,
+      this.hilite_fronde})
       : super();
 
   @override
@@ -185,7 +192,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                         useGroupSector: useGroupSector ?? false,
                         backgroundOpacity: backgroundOpacity,
                         backgroundColor: backgroundColor ??
-                            Theme.of(context).scaffoldBackgroundColor)),
+                            Theme.of(context).scaffoldBackgroundColor,
+                        hilite_fronde: hilite_fronde)),
               ),
             ),
             if (withTitle && title != null)
@@ -446,6 +454,7 @@ class AssemblyPainter extends CustomPainter {
   final bool? useGroupSector;
   final Color backgroundColor;
   final double backgroundOpacity;
+  final bool? hilite_fronde;
 
   AssemblyPainter(
       {required this.assemblyAngle,
@@ -457,7 +466,8 @@ class AssemblyPainter extends CustomPainter {
       required this.nbRows,
       this.useGroupSector,
       required this.backgroundOpacity,
-      required this.backgroundColor})
+      required this.backgroundColor,
+      this.hilite_fronde})
       : super();
 
   @override
@@ -647,7 +657,8 @@ class AssemblyPainter extends CustomPainter {
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + i * gapRows,
-          rectRadius: 10);
+          rectRadius: 10,
+          hilite_fronde: hilite_fronde);
     }
   }
 
@@ -766,7 +777,8 @@ class AssemblyPainter extends CustomPainter {
       double angleArcDegres = 90,
       double angleOffset = 0,
       double rayonArc = 100,
-      double rectRadius = 0}) {
+      double rectRadius = 0,
+      bool? hilite_fronde = false}) {
     if (nbElements == 1) {
       double angle = 0 + angleOffset;
       if (elementAttributeRow != null && allElementAttributes != null) {
@@ -774,7 +786,13 @@ class AssemblyPainter extends CustomPainter {
           if (element.row == elementAttributeRow && element.position == 0) {
             if (element.parentColor != null &&
                 element.parentColor == element.elementColor) {
-              color = element.elementColor.withOpacity(0.3);
+              if ((element.parentColor == hemicyleVoteAbstention ||
+                      element.parentColor == hemicyleNoVote) &&
+                  (hilite_fronde ?? false)) {
+                color = element.elementColor;
+              } else {
+                color = element.elementColor.withOpacity(0.3);
+              }
             } else if (element.parentColor != null &&
                 element.parentColor != element.elementColor) {
               color = element.elementColor;
@@ -803,7 +821,13 @@ class AssemblyPainter extends CustomPainter {
           if (element.row == elementAttributeRow && element.position == 0) {
             if (element.parentColor != null &&
                 element.parentColor == element.elementColor) {
-              color = element.elementColor.withOpacity(0.3);
+              if ((element.parentColor == hemicyleVoteAbstention ||
+                      element.parentColor == hemicyleNoVote) &&
+                  (hilite_fronde ?? false)) {
+                color = element.elementColor;
+              } else {
+                color = element.elementColor.withOpacity(0.3);
+              }
             } else if (element.parentColor != null &&
                 element.parentColor != element.elementColor) {
               color = element.elementColor;
@@ -831,7 +855,13 @@ class AssemblyPainter extends CustomPainter {
             if (element.row == elementAttributeRow && element.position == i) {
               if (element.parentColor != null &&
                   element.parentColor == element.elementColor) {
-                color = element.elementColor.withOpacity(0.3);
+                if ((element.parentColor == hemicyleVoteAbstention ||
+                        element.parentColor == hemicyleNoVote) &&
+                    (hilite_fronde ?? false)) {
+                  color = element.elementColor;
+                } else {
+                  color = element.elementColor.withOpacity(0.3);
+                }
               } else if (element.parentColor != null &&
                   element.parentColor != element.elementColor) {
                 color = element.elementColor;
@@ -859,7 +889,13 @@ class AssemblyPainter extends CustomPainter {
               element.position == maxLoop + 1) {
             if (element.parentColor != null &&
                 element.parentColor == element.elementColor) {
-              color = element.elementColor.withOpacity(0.3);
+              if ((element.parentColor == hemicyleVoteAbstention ||
+                      element.parentColor == hemicyleNoVote) &&
+                  (hilite_fronde ?? false)) {
+                color = element.elementColor;
+              } else {
+                color = element.elementColor.withOpacity(0.3);
+              }
             } else if (element.parentColor != null &&
                 element.parentColor != element.elementColor) {
               color = element.elementColor;
