@@ -784,21 +784,7 @@ class AssemblyPainter extends CustomPainter {
       if (elementAttributeRow != null && allElementAttributes != null) {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow && element.position == 0) {
-            if (element.parentColor != null &&
-                element.parentColor == element.elementColor) {
-              if ((element.elementColor == hemicyleVoteAbstention ||
-                      element.elementColor == hemicyleNoVote) &&
-                  (hilite_fronde ?? false)) {
-                color = element.elementColor;
-              } else {
-                color = element.elementColor.withOpacity(0.3);
-              }
-            } else if (element.parentColor != null &&
-                element.parentColor != element.elementColor) {
-              color = element.elementColor;
-            } else {
-              color = element.elementColor;
-            }
+            color = returnTheDotColor(element);
           }
         }
       }
@@ -819,22 +805,7 @@ class AssemblyPainter extends CustomPainter {
       if (elementAttributeRow != null && allElementAttributes != null) {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow && element.position == 0) {
-            if (element.parentColor != null &&
-                element.parentColor == element.elementColor) {
-              // print("hilite_fronde ?");
-              if ((element.elementColor == hemicyleVoteAbstention ||
-                      element.elementColor == hemicyleNoVote) &&
-                  (hilite_fronde ?? false)) {
-                color = element.elementColor;
-              } else {
-                color = element.elementColor.withOpacity(0.3);
-              }
-            } else if (element.parentColor != null &&
-                element.parentColor != element.elementColor) {
-              color = element.elementColor;
-            } else {
-              color = element.elementColor;
-            }
+            color = returnTheDotColor(element);
           }
         }
       }
@@ -854,21 +825,7 @@ class AssemblyPainter extends CustomPainter {
         if (elementAttributeRow != null && allElementAttributes != null) {
           for (ElementAttributes element in allElementAttributes) {
             if (element.row == elementAttributeRow && element.position == i) {
-              if (element.parentColor != null &&
-                  element.parentColor == element.elementColor) {
-                if ((element.elementColor == hemicyleVoteAbstention ||
-                        element.elementColor == hemicyleNoVote) &&
-                    (hilite_fronde ?? false)) {
-                  color = element.elementColor;
-                } else {
-                  color = element.elementColor.withOpacity(0.3);
-                }
-              } else if (element.parentColor != null &&
-                  element.parentColor != element.elementColor) {
-                color = element.elementColor;
-              } else {
-                color = element.elementColor;
-              }
+              color = returnTheDotColor(element);
             }
           }
         }
@@ -888,21 +845,7 @@ class AssemblyPainter extends CustomPainter {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow &&
               element.position == maxLoop + 1) {
-            if (element.parentColor != null &&
-                element.parentColor == element.elementColor) {
-              if ((element.elementColor == hemicyleVoteAbstention ||
-                      element.elementColor == hemicyleNoVote) &&
-                  (hilite_fronde ?? false)) {
-                color = element.elementColor;
-              } else {
-                color = element.elementColor.withOpacity(0.3);
-              }
-            } else if (element.parentColor != null &&
-                element.parentColor != element.elementColor) {
-              color = element.elementColor;
-            } else {
-              color = element.elementColor;
-            }
+            color = returnTheDotColor(element);
           }
         }
       }
@@ -917,6 +860,27 @@ class AssemblyPainter extends CustomPainter {
               .toDouble(),
           radius: rectRadius);
     }
+  }
+
+  Color returnTheDotColor(ElementAttributes element) {
+    Color? color;
+    if (element.parentColor != null &&
+        element.parentColor == element.elementColor) {
+      // print("hilite_fronde ?");
+      if ((element.elementColor == hemicyleVoteAbstention ||
+              element.elementColor == hemicyleNoVote) &&
+          (hilite_fronde ?? false)) {
+        color = element.elementColor;
+      } else {
+        color = element.elementColor.withOpacity(0.3);
+      }
+    } else if (element.parentColor != null &&
+        element.parentColor != element.elementColor) {
+      color = element.elementColor;
+    } else {
+      color = element.elementColor;
+    }
+    return color;
   }
 
   void drawLine(Canvas canvas, Size canvasSize,
