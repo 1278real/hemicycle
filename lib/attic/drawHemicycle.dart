@@ -866,7 +866,7 @@ class AssemblyPainter extends CustomPainter {
     Color? color;
     if (element.parentColor != null &&
         element.parentColor == element.elementColor) {
-      // print("hilite_fronde ?");
+      print("hilite_fronde ? " + hilite_fronde.toString());
       if ((element.elementColor == hemicyleVoteAbstention ||
               element.elementColor == hemicyleNoVote) &&
           (hilite_fronde ?? false)) {
