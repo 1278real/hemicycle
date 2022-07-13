@@ -1,3 +1,7 @@
+## 0.3.2
+
+* Updating informations and comments for pub.dev scoring...
+
 ## 0.3.0
 
 * Enable the highlighting for discordant voters in a Group in Individual Votes mode

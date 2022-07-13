@@ -22,7 +22,7 @@ class DrawHemicycle extends StatefulWidget {
   final int? nbRows;
   final bool? useGroupSector;
   final double? backgroundOpacity;
-  final bool? hilite_fronde;
+  final bool? hiliteFronde;
 
   /// ### Creates a widget with Assembly view defined by these parameters :
   ///
@@ -44,7 +44,7 @@ class DrawHemicycle extends StatefulWidget {
   ///
   /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
   ///
-  /// • [hilite_fronde] is a boolean that display or not the No Vote and Abstention in Group that have a majority of Voters in Individual Votes view.
+  /// • [hiliteFronde] is a boolean that display or not the No Vote and Abstention in Group that have a majority of Voters in Individual Votes view.
   ///
   /// • [backgroundOpacity] is used with [useGroupSector] to change the Opacity of the Sectors behind the IndividualVotes Dots
   ///
@@ -62,7 +62,7 @@ class DrawHemicycle extends StatefulWidget {
       this.nbRows,
       this.useGroupSector,
       this.backgroundOpacity,
-      this.hilite_fronde})
+      this.hiliteFronde})
       : super();
 
   @override
@@ -80,7 +80,7 @@ class DrawHemicycle extends StatefulWidget {
       useGroupSector: useGroupSector ?? false,
       backgroundColor: backgroundColor,
       backgroundOpacity: backgroundOpacity ?? 0.05,
-      hilite_fronde: hilite_fronde);
+      hiliteFronde: hiliteFronde);
 }
 
 class _DrawHemicycleState extends State<DrawHemicycle> {
@@ -97,7 +97,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   late int? nbRows;
   final bool? useGroupSector;
   final double backgroundOpacity;
-  final bool? hilite_fronde;
+  final bool? hiliteFronde;
 
   _DrawHemicycleState(
       {required this.assemblyElements,
@@ -113,7 +113,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       this.nbRows,
       this.useGroupSector,
       required this.backgroundOpacity,
-      this.hilite_fronde})
+      this.hiliteFronde})
       : super();
 
   @override
@@ -193,7 +193,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                         backgroundOpacity: backgroundOpacity,
                         backgroundColor: backgroundColor ??
                             Theme.of(context).scaffoldBackgroundColor,
-                        hilite_fronde: hilite_fronde)),
+                        hiliteFronde: hiliteFronde)),
               ),
             ),
             if (withTitle && title != null)
@@ -454,7 +454,7 @@ class AssemblyPainter extends CustomPainter {
   final bool? useGroupSector;
   final Color backgroundColor;
   final double backgroundOpacity;
-  final bool? hilite_fronde;
+  final bool? hiliteFronde;
 
   AssemblyPainter(
       {required this.assemblyAngle,
@@ -467,7 +467,7 @@ class AssemblyPainter extends CustomPainter {
       this.useGroupSector,
       required this.backgroundOpacity,
       required this.backgroundColor,
-      this.hilite_fronde})
+      this.hiliteFronde})
       : super();
 
   @override
@@ -477,7 +477,6 @@ class AssemblyPainter extends CustomPainter {
     List<Color> paletteParentColors =
         List.generate(assemblyElements, (index) => hemicyleNoVote);
     List<Color> paletteGroupColors = [];
-    List<int> sectorGroupSize = [];
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
@@ -658,7 +657,7 @@ class AssemblyPainter extends CustomPainter {
           angleOffset: angleOffset,
           rayonArc: radiusCenter + i * gapRows,
           rectRadius: 10,
-          hilite_fronde: hilite_fronde);
+          hiliteFronde: hiliteFronde);
     }
   }
 
@@ -678,7 +677,6 @@ class AssemblyPainter extends CustomPainter {
       double backgroundOpacity = 0.1,
       required Color widgetColorBackground}) {
     double angleDebut = ((-angleArcDegrees / 2) + angleOffset);
-    double angleFin = (angleArcDegrees / 2) + angleOffset;
 
     final paint = new Paint();
     paint.color = color;
@@ -748,7 +746,6 @@ class AssemblyPainter extends CustomPainter {
       double angleOffset = 0,
       double rayonArc = 100}) {
     double angleDebut = (-angleArcDegres / 2) + angleOffset;
-    double angleFin = (angleArcDegres / 2) + angleOffset;
 
     final paint = new Paint();
     paint.color = color;
@@ -778,7 +775,7 @@ class AssemblyPainter extends CustomPainter {
       double angleOffset = 0,
       double rayonArc = 100,
       double rectRadius = 0,
-      bool? hilite_fronde = false}) {
+      bool? hiliteFronde = false}) {
     if (nbElements == 1) {
       double angle = 0 + angleOffset;
       if (elementAttributeRow != null && allElementAttributes != null) {
