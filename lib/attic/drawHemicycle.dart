@@ -22,6 +22,7 @@ class DrawHemicycle extends StatefulWidget {
   final int? nbRows;
   final bool? useGroupSector;
   final double? backgroundOpacity;
+  final bool? hiliteFronde;
 
   /// ### Creates a widget with Assembly view defined by these parameters :
   ///
@@ -43,6 +44,8 @@ class DrawHemicycle extends StatefulWidget {
   ///
   /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
   ///
+  /// • [hiliteFronde] is a boolean that display or not the No Vote and Abstention in Group that have a majority of Voters in Individual Votes view.
+  ///
   /// • [backgroundOpacity] is used with [useGroupSector] to change the Opacity of the Sectors behind the IndividualVotes Dots
   ///
   /// • [backgroundColor] is used to fill the Drawing area with a plain background color
@@ -58,7 +61,8 @@ class DrawHemicycle extends StatefulWidget {
       this.title,
       this.nbRows,
       this.useGroupSector,
-      this.backgroundOpacity})
+      this.backgroundOpacity,
+      this.hiliteFronde})
       : super();
 
   @override
@@ -75,7 +79,8 @@ class DrawHemicycle extends StatefulWidget {
       nbRows: nbRows,
       useGroupSector: useGroupSector ?? false,
       backgroundColor: backgroundColor,
-      backgroundOpacity: backgroundOpacity ?? 0.05);
+      backgroundOpacity: backgroundOpacity ?? 0.05,
+      hiliteFronde: hiliteFronde);
 }
 
 class _DrawHemicycleState extends State<DrawHemicycle> {
@@ -92,6 +97,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   late int? nbRows;
   final bool? useGroupSector;
   final double backgroundOpacity;
+  final bool? hiliteFronde;
 
   _DrawHemicycleState(
       {required this.assemblyElements,
@@ -106,7 +112,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       this.title,
       this.nbRows,
       this.useGroupSector,
-      required this.backgroundOpacity})
+      required this.backgroundOpacity,
+      this.hiliteFronde})
       : super();
 
   @override
@@ -185,7 +192,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                         useGroupSector: useGroupSector ?? false,
                         backgroundOpacity: backgroundOpacity,
                         backgroundColor: backgroundColor ??
-                            Theme.of(context).scaffoldBackgroundColor)),
+                            Theme.of(context).scaffoldBackgroundColor,
+                        hiliteFronde: hiliteFronde)),
               ),
             ),
             if (withTitle && title != null)
@@ -446,6 +454,7 @@ class AssemblyPainter extends CustomPainter {
   final bool? useGroupSector;
   final Color backgroundColor;
   final double backgroundOpacity;
+  final bool? hiliteFronde;
 
   AssemblyPainter(
       {required this.assemblyAngle,
@@ -457,7 +466,8 @@ class AssemblyPainter extends CustomPainter {
       required this.nbRows,
       this.useGroupSector,
       required this.backgroundOpacity,
-      required this.backgroundColor})
+      required this.backgroundColor,
+      this.hiliteFronde})
       : super();
 
   @override
@@ -467,7 +477,6 @@ class AssemblyPainter extends CustomPainter {
     List<Color> paletteParentColors =
         List.generate(assemblyElements, (index) => hemicyleNoVote);
     List<Color> paletteGroupColors = [];
-    List<int> sectorGroupSize = [];
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
@@ -647,7 +656,8 @@ class AssemblyPainter extends CustomPainter {
           angleArcDegres: assemblyAngle,
           angleOffset: angleOffset,
           rayonArc: radiusCenter + i * gapRows,
-          rectRadius: 10);
+          rectRadius: 10,
+          hiliteFronde: hiliteFronde);
     }
   }
 
@@ -667,7 +677,6 @@ class AssemblyPainter extends CustomPainter {
       double backgroundOpacity = 0.1,
       required Color widgetColorBackground}) {
     double angleDebut = ((-angleArcDegrees / 2) + angleOffset);
-    double angleFin = (angleArcDegrees / 2) + angleOffset;
 
     final paint = new Paint();
     paint.color = color;
@@ -737,7 +746,6 @@ class AssemblyPainter extends CustomPainter {
       double angleOffset = 0,
       double rayonArc = 100}) {
     double angleDebut = (-angleArcDegres / 2) + angleOffset;
-    double angleFin = (angleArcDegres / 2) + angleOffset;
 
     final paint = new Paint();
     paint.color = color;
@@ -766,21 +774,14 @@ class AssemblyPainter extends CustomPainter {
       double angleArcDegres = 90,
       double angleOffset = 0,
       double rayonArc = 100,
-      double rectRadius = 0}) {
+      double rectRadius = 0,
+      bool? hiliteFronde = false}) {
     if (nbElements == 1) {
       double angle = 0 + angleOffset;
       if (elementAttributeRow != null && allElementAttributes != null) {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow && element.position == 0) {
-            if (element.parentColor != null &&
-                element.parentColor == element.elementColor) {
-              color = element.elementColor.withOpacity(0.3);
-            } else if (element.parentColor != null &&
-                element.parentColor != element.elementColor) {
-              color = element.elementColor;
-            } else {
-              color = element.elementColor;
-            }
+            color = returnTheDotColor(element);
           }
         }
       }
@@ -801,15 +802,7 @@ class AssemblyPainter extends CustomPainter {
       if (elementAttributeRow != null && allElementAttributes != null) {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow && element.position == 0) {
-            if (element.parentColor != null &&
-                element.parentColor == element.elementColor) {
-              color = element.elementColor.withOpacity(0.3);
-            } else if (element.parentColor != null &&
-                element.parentColor != element.elementColor) {
-              color = element.elementColor;
-            } else {
-              color = element.elementColor;
-            }
+            color = returnTheDotColor(element);
           }
         }
       }
@@ -829,15 +822,7 @@ class AssemblyPainter extends CustomPainter {
         if (elementAttributeRow != null && allElementAttributes != null) {
           for (ElementAttributes element in allElementAttributes) {
             if (element.row == elementAttributeRow && element.position == i) {
-              if (element.parentColor != null &&
-                  element.parentColor == element.elementColor) {
-                color = element.elementColor.withOpacity(0.3);
-              } else if (element.parentColor != null &&
-                  element.parentColor != element.elementColor) {
-                color = element.elementColor;
-              } else {
-                color = element.elementColor;
-              }
+              color = returnTheDotColor(element);
             }
           }
         }
@@ -857,15 +842,7 @@ class AssemblyPainter extends CustomPainter {
         for (ElementAttributes element in allElementAttributes) {
           if (element.row == elementAttributeRow &&
               element.position == maxLoop + 1) {
-            if (element.parentColor != null &&
-                element.parentColor == element.elementColor) {
-              color = element.elementColor.withOpacity(0.3);
-            } else if (element.parentColor != null &&
-                element.parentColor != element.elementColor) {
-              color = element.elementColor;
-            } else {
-              color = element.elementColor;
-            }
+            color = returnTheDotColor(element);
           }
         }
       }
@@ -880,6 +857,20 @@ class AssemblyPainter extends CustomPainter {
               .toDouble(),
           radius: rectRadius);
     }
+  }
+
+  Color returnTheDotColor(ElementAttributes element) {
+    Color? color;
+    if (element.parentColor != null &&
+        element.parentColor == element.elementColor) {
+      color = element.elementColor.withOpacity(0.3);
+    } else if (element.parentColor != null &&
+        element.parentColor != element.elementColor) {
+      color = element.elementColor;
+    } else {
+      color = element.elementColor;
+    }
+    return color;
   }
 
   void drawLine(Canvas canvas, Size canvasSize,
