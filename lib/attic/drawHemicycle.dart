@@ -873,7 +873,7 @@ class AssemblyPainter extends CustomPainter {
       if ((element.elementColor == hemicyleVoteAbstention ||
               element.elementColor == hemicyleNoVote) &&
           (hilite_fronde ?? false)) {
-        print("hilite_fronde ? " + hilite_fronde.toString());
+        // print("hilite_fronde ? " + hilite_fronde.toString());
         color = Colors.red;
       } else {
         color = element.elementColor;
