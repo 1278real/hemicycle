@@ -31,7 +31,7 @@ class ElementAttributes with IterableMixin<ElementAttributes> {
 class SectorAttributes with IterableMixin<SectorAttributes> {
   int index;
   int size;
-  Color elementColor;
+  Color? elementColor;
   String? description;
 
   /// ### Describes the parameters for each sector of the surrounding arc around the votes :

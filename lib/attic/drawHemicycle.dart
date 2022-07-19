@@ -14,6 +14,7 @@ class DrawHemicycle extends StatefulWidget {
   final double? assemblyWidth;
   final List<IndividualVotes>? individualVotes;
   final List<GroupSectors>? groupSectors;
+  final List<GroupSectors>? superGroupSectors;
   final Color? backgroundColor;
   final bool? withLegend;
   final int? minLegendRows;
@@ -43,6 +44,7 @@ class DrawHemicycle extends StatefulWidget {
   /// • [nbRows] is the number of rows in the Assembly representation. By default, if not provided, it is 12.
   ///
   /// • [useGroupSector] is a boolean that display or not a surrounding Group visualization around the Assembly in Individual Votes view. It needs both [individualVotes] and [groupSectors] to be provided to display.
+  ///   If [superGroupSectors] is provided, a second arc is display around the first one for intergroup connection. [superGroupSectors] and [groupSectors] need to have the same length and matching structure.
   ///
   /// • [hiliteFronde] is a boolean that display or not the No Vote and Abstention in Group that have a majority of Voters in Individual Votes view.
   ///
@@ -54,6 +56,7 @@ class DrawHemicycle extends StatefulWidget {
       this.assemblyWidth,
       this.individualVotes,
       this.groupSectors,
+      this.superGroupSectors,
       this.backgroundColor,
       this.withLegend,
       this.minLegendRows,
@@ -72,6 +75,7 @@ class DrawHemicycle extends StatefulWidget {
       assemblyWidth: assemblyWidth ?? 1,
       individualVotes: individualVotes,
       groupSectors: groupSectors,
+      superGroupSectors: superGroupSectors,
       withLegend: withLegend ?? false,
       minLegendRows: minLegendRows,
       withTitle: withTitle ?? false,
@@ -89,6 +93,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
   double assemblyWidth;
   late List<IndividualVotes>? individualVotes;
   late List<GroupSectors>? groupSectors;
+  final List<GroupSectors>? superGroupSectors;
   late Color? backgroundColor;
   bool withLegend;
   late int? minLegendRows;
@@ -105,6 +110,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
       required this.assemblyWidth,
       this.individualVotes,
       this.groupSectors,
+      this.superGroupSectors,
       this.backgroundColor,
       required this.withLegend,
       this.minLegendRows,
@@ -188,6 +194,7 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                             MediaQuery.of(context).size.width * assemblyWidth,
                         individualVotes: individualVotes,
                         groupSectors: groupSectors,
+                        superGroupSectors: superGroupSectors,
                         nbRows: nbRows ?? 12,
                         useGroupSector: useGroupSector ?? false,
                         backgroundOpacity: backgroundOpacity,
@@ -450,6 +457,7 @@ class AssemblyPainter extends CustomPainter {
   double viewWidth;
   final List<IndividualVotes>? individualVotes;
   final List<GroupSectors>? groupSectors;
+  final List<GroupSectors>? superGroupSectors;
   final int nbRows;
   final bool? useGroupSector;
   final Color backgroundColor;
@@ -463,6 +471,7 @@ class AssemblyPainter extends CustomPainter {
       required this.viewWidth,
       this.individualVotes,
       this.groupSectors,
+      this.superGroupSectors,
       required this.nbRows,
       this.useGroupSector,
       required this.backgroundOpacity,
@@ -477,6 +486,7 @@ class AssemblyPainter extends CustomPainter {
     List<Color> paletteParentColors =
         List.generate(assemblyElements, (index) => hemicyleNoVote);
     List<Color> paletteGroupColors = [];
+    List<Color> paletteSuperGroupColors = [];
 
     if (individualVotes != null) {
       List<GroupPairing> groupPairingVotes = [];
@@ -538,7 +548,12 @@ class AssemblyPainter extends CustomPainter {
             (paletteGroupColors.length > 0 ? 1 : 0));
     double gapRowsSector = canvasSize.width /
         2 /
-        (nbRows + (paletteGroupColors.length > 0 ? 1 : 0));
+        (nbRows +
+            (paletteGroupColors.length > 0
+                ? paletteSuperGroupColors.length > 0
+                    ? 2
+                    : 1
+                : 0));
     double angleOffset = 0;
 
     double verticalOffsetBase = canvasSize.height *
@@ -572,13 +587,27 @@ class AssemblyPainter extends CustomPainter {
     }
     List<ElementAttributes> theElementsAttributes = [];
     List<SectorAttributes> sectorBackgroundElements = [];
+    List<SectorAttributes> superSectorBackgroundElements = [];
     List<int> rowFilled = List.filled(nbRows, 0);
 
     List<Color> theGroupColors = [];
+    List<Color?> theSuperGroupColors = [];
     if (groupSectors != null) {
       for (GroupSectors group in groupSectors!) {
         for (var i = 0; i < group.nbElements; i++) {
           theGroupColors.add(group.sectorColor);
+        }
+      }
+    } else {
+      // print("groupSectors == null");
+    }
+    if (superGroupSectors != null) {
+      if (groupSectors != null &&
+          superGroupSectors!.length == groupSectors!.length) {
+        for (GroupSectors group in superGroupSectors!) {
+          for (var i = 0; i < group.nbElements; i++) {
+            theSuperGroupColors.add(group.sectorColor);
+          }
         }
       }
     } else {
@@ -607,6 +636,9 @@ class AssemblyPainter extends CustomPainter {
             if (localRow == nbRows - 1) {
               sectorBackgroundElements
                   .add(SectorAttributes(i, 1, theGroupColors[i]));
+
+              superSectorBackgroundElements
+                  .add(SectorAttributes(i, 1, theSuperGroupColors[i]));
             }
           }
         } else {
@@ -625,6 +657,25 @@ class AssemblyPainter extends CustomPainter {
 
     double expanderSector = 2;
 
+    if ((useGroupSector ?? false) &&
+        individualVotes != null &&
+        superSectorBackgroundElements != []) {
+      // print("drawBackgroundArcOfSectors OK");
+      drawBackgroundArcOfSectors(canvas, canvasSize,
+          allSectorAttributes: superSectorBackgroundElements,
+          centerOffset: verticalOffsetForSectors,
+          assemblyAngle: assemblyAngle,
+          angleArcDegrees: assemblyAngle,
+          angleOffset: angleOffset,
+          insideHole: ((radiusCenter / 2) + (nbRows + 1) * gapRowsSector) *
+              expanderSector,
+          rayonArc:
+              (radiusCenter + (nbRows + 1) * gapRowsSector) * expanderSector,
+          backgroundOpacity: backgroundOpacity,
+          widgetColorBackground: backgroundColor);
+    } else {
+      // print("drawBackgroundArcOfSectors NOPE");
+    }
     if ((useGroupSector ?? false) &&
         individualVotes != null &&
         sectorBackgroundElements != []) {
@@ -695,7 +746,7 @@ class AssemblyPainter extends CustomPainter {
 
     double arcOffset = 0;
     for (SectorAttributes sector in allSectorAttributes) {
-      paint.color = sector.elementColor;
+      paint.color = sector.elementColor ?? backgroundColor;
       double sweep = sector.size / allSectorsSize * angleArcDegrees;
       drawAnArc(canvas, paint,
           center: center,

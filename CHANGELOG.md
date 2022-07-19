@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Added second arc for SuperGroup surrounding on Individual Votes view...
+
 ## 0.3.2
 
 * Updating informations and comments for pub.dev scoring...
@@ -17,11 +21,11 @@
 
 ## 0.1.0
 
-* added Group surrounding on Individual Votes view
+* Added Group surrounding on Individual Votes view
 
 ## 0.0.33
 
-* changed Colors name from custom*** to hemicycle***
+* Changed Colors name from custom*** to hemicycle***
 (i.e. customVoteFor (green) is now hemicycleVoteFor)
 
 ## 0.0.30
