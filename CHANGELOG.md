@@ -1,4 +1,4 @@
-## 0.4.0
+## 0.4.1
 
 * Added second arc for SuperGroup surrounding on Individual Votes view...
 
