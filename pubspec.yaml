@@ -1,6 +1,6 @@
 name: hemicycle
 description: Draw a semi-circle dotted representation. It is designed for displaying groups in an Assembly per sector, or individual votes.
-version: 0.4.0
+version: 0.4.1
 homepage:
 repository: https://github.com/1278real/hemicycle
 

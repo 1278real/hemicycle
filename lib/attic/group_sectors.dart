@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class GroupSectors with IterableMixin<GroupSectors> {
   int nbElements;
-  Color sectorColor;
+  Color? sectorColor;
   String? description;
 
   /// ### Creates a group of dots a.k.a sector that has the same color :
@@ -17,11 +17,15 @@ class GroupSectors with IterableMixin<GroupSectors> {
   GroupSectors(this.nbElements, this.sectorColor, {this.description});
 
   /// [sectorColorString] is the default String if no description is provided for Legend :
-  String get sectorColorString {
-    return "#" +
-        sectorColor.red.toRadixString(16) +
-        sectorColor.green.toRadixString(16) +
-        sectorColor.blue.toRadixString(16);
+  String? get sectorColorString {
+    if (sectorColor != null) {
+      return "#" +
+          sectorColor!.red.toRadixString(16) +
+          sectorColor!.green.toRadixString(16) +
+          sectorColor!.blue.toRadixString(16);
+    } else {
+      return null;
+    }
   }
 
   @override

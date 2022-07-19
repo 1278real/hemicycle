@@ -437,7 +437,8 @@ class _DrawHemicycleState extends State<DrawHemicycle> {
                                                       .description ??
                                                   groupSectors![
                                                           i * legendRows + j]
-                                                      .sectorColorString),
+                                                      .sectorColorString ??
+                                                  ""),
                                             ],
                                           ),
                                     ]),
@@ -528,7 +529,7 @@ class AssemblyPainter extends CustomPainter {
       int offset = 0;
       for (GroupSectors element in groupSectors!) {
         for (var i = offset; i < offset + element.nbElements; i++) {
-          paletteColors[i] = element.sectorColor;
+          paletteColors[i] = element.sectorColor ?? backgroundColor;
         }
         offset += element.nbElements;
       }
@@ -595,7 +596,7 @@ class AssemblyPainter extends CustomPainter {
     if (groupSectors != null) {
       for (GroupSectors group in groupSectors!) {
         for (var i = 0; i < group.nbElements; i++) {
-          theGroupColors.add(group.sectorColor);
+          theGroupColors.add(group.sectorColor ?? backgroundColor);
         }
       }
     } else {
@@ -606,7 +607,8 @@ class AssemblyPainter extends CustomPainter {
           superGroupSectors!.length == groupSectors!.length) {
         for (GroupSectors group in superGroupSectors!) {
           for (var i = 0; i < group.nbElements; i++) {
-            theSuperGroupColors.add(group.sectorColor.withOpacity(0.3));
+            theSuperGroupColors
+                .add((group.sectorColor ?? backgroundColor).withOpacity(0.3));
           }
         }
       }
