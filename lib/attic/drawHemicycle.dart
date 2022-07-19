@@ -606,7 +606,7 @@ class AssemblyPainter extends CustomPainter {
           superGroupSectors!.length == groupSectors!.length) {
         for (GroupSectors group in superGroupSectors!) {
           for (var i = 0; i < group.nbElements; i++) {
-            theSuperGroupColors.add(group.sectorColor);
+            theSuperGroupColors.add(group.sectorColor.withOpacity(0.3));
           }
         }
       }
